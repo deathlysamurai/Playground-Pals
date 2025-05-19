@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8jvute32c05i"]
+
+[ext_resource type="Script" uid="uid://b1khaqxjjwsix" path="res://scenes/screen/menu/menu.gd" id="1_55vna"]
+[ext_resource type="Texture2D" uid="uid://wlmjeacidu18" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Backgrounds/Default/background_clouds.png" id="2_o8itj"]
+[ext_resource type="Script" uid="uid://c31abdf0mjr3p" path="res://scenes/screen/menu/background_sprite.gd" id="3_o8itj"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_55vna")
+
+[node name="BackgroundSprite" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(563.5, 300)
+scale = Vector2(5.40234, 3.34375)
+texture = ExtResource("2_o8itj")
+script = ExtResource("3_o8itj")
+metadata/_edit_group_ = true
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -89.5
+offset_top = -45.5
+offset_right = 89.5
+offset_bottom = 45.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start
+"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
