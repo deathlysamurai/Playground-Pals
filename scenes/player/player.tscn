@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5ectkst4kcax"]
+[gd_scene load_steps=9 format=3 uid="uid://c5ectkst4kcax"]
 
 [ext_resource type="Texture2D" uid="uid://clpe2e68ulmhh" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_front.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://qsvitwyovxj5" path="res://scenes/player/player.gd" id="1_gmlin"]
 [ext_resource type="Texture2D" uid="uid://qqm0vuou4250" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_idle.png" id="2_gmlin"]
+[ext_resource type="Texture2D" uid="uid://c3exuiy727e2t" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_jump.png" id="4_75vfm"]
+[ext_resource type="Texture2D" uid="uid://dv87c5h45dd62" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_walk_a.png" id="4_p47bc"]
+[ext_resource type="Texture2D" uid="uid://cusu2d4na3q6p" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_walk_b.png" id="5_75vfm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tyixm"]
 animations = [{
@@ -27,6 +30,25 @@ animations = [{
 "loop": true,
 "name": &"idle_flip",
 "speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_75vfm")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_p47bc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_75vfm")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
@@ -41,8 +63,6 @@ position = Vector2(0, -64)
 sprite_frames = SubResource("SpriteFrames_tyixm")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.199972
-flip_h = true
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -48)
