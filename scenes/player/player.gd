@@ -10,6 +10,10 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
+	# Checks if the player has fallen too far and resets the level
+	if position.y >= 10000:
+		get_tree().reload_current_scene()
+
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -35,3 +39,8 @@ func _physics_process(delta: float) -> void:
 			$PlayerAnimation.play("jump")
 
 	move_and_slide()
+
+func _process(delta: float) -> void:
+	# Reload level
+	if Input.is_action_just_pressed("reset"):
+		get_tree().reload_current_scene()
