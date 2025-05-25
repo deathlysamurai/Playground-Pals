@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://h06dc54ft1qa"]
+
+[ext_resource type="Script" uid="uid://bnt58h4lvq5g0" path="res://scenes/enemies/frog.gd" id="1_kosjv"]
+[ext_resource type="Texture2D" uid="uid://cwb4vjs6xa5t6" path="res://assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-double.png" id="1_lohqt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kosjv"]
+atlas = ExtResource("1_lohqt")
+region = Rect2(640, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lohqt"]
+atlas = ExtResource("1_lohqt")
+region = Rect2(512, 896, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d72w0"]
+atlas = ExtResource("1_lohqt")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5p7qk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kosjv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lohqt")
+}],
+"loop": true,
+"name": &"idle_jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d72w0")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jksd0"]
+radius = 68.0661
+
+[node name="Frog" type="CharacterBody2D"]
+script = ExtResource("1_kosjv")
+
+[node name="FrogAnimation" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -63)
+sprite_frames = SubResource("SpriteFrames_5p7qk")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="FrogCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -52)
+shape = SubResource("CircleShape2D_jksd0")
