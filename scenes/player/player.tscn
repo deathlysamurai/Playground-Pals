@@ -55,7 +55,7 @@ animations = [{
 radius = 37.0
 height = 96.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_gmlin")
 
 [node name="PlayerAnimation" type="AnimatedSprite2D" parent="."]

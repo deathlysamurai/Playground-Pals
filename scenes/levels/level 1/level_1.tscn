@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=4 uid="uid://qer1qjmnvpmn"]
+[gd_scene load_steps=6 format=4 uid="uid://qer1qjmnvpmn"]
 
 [ext_resource type="Texture2D" uid="uid://c7x7slgruoek1" path="res://assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png" id="1_iruw1"]
 [ext_resource type="PackedScene" uid="uid://c5ectkst4kcax" path="res://scenes/player/player.tscn" id="2_e1eqq"]
+[ext_resource type="PackedScene" uid="uid://h06dc54ft1qa" path="res://scenes/enemies/frog.tscn" id="3_jkir6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e1eqq"]
 texture = ExtResource("1_iruw1")
@@ -134,6 +135,7 @@ texture_region_size = Vector2i(64, 64)
 2:6/0 = 0
 3:6/0 = 0
 4:6/0 = 0
+4:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 5:6/0 = 0
 6:6/0 = 0
 7:6/0 = 0
@@ -367,8 +369,11 @@ sources/0 = SubResource("TileSetAtlasSource_e1eqq")
 [node name="Level 1" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAABAAgAAAAHAAcAAAACAAgAAAAHAAYAAAADAAgAAAAHAAYAAAAEAAgAAAAHAAMAAAAGAAcAAAAHAAUAAAAHAAcAAAAHAAYAAAAIAAcAAAAHAAQAAAAKAAUAAAAHAAwAAAAKAAoAAAAHAAoAAAALAAoAAAAHAAkAAAAMAAoAAAAHAAkAAAANAAoAAAAHAAkAAAAOAAoAAAAHAAkAAAAPAAoAAAAHAAkAAAAQAAoAAAAHAAgAAAARAAkAAAAIAAQAAAASAAgAAAAIAAQAAAATAAcAAAAIAAQAAAA=")
+tile_map_data = PackedByteArray("AAABAAgAAAAHAAcAAAACAAgAAAAHAAYAAAADAAgAAAAHAAYAAAAGAAcAAAAHAAUAAAAHAAcAAAAHAAYAAAAIAAcAAAAHAAQAAAAKAAoAAAAHAAkAAAALAAoAAAAHAAkAAAAMAAoAAAAHAAkAAAANAAoAAAAHAAkAAAAOAAoAAAAHAAkAAAAPAAoAAAAHAAkAAAAQAAoAAAAHAAgAAAARAAkAAAAIAAQAAAASAAgAAAAIAAQAAAATAAcAAAAIAAQAAAAJAAoAAAAHAAkAAAAIAAoAAAAHAAkAAAAHAAoAAAAHAAkAAAAGAAoAAAAHAAkAAAAFAAoAAAAHAAkAAAAEAAoAAAAHAAkAAAADAAoAAAAHAAkAAAACAAoAAAAHAAkAAAABAAoAAAAHAAoAAAA=")
 tile_set = SubResource("TileSet_jkir6")
 
 [node name="Player" parent="." instance=ExtResource("2_e1eqq")]
 position = Vector2(121, 433)
+
+[node name="Frog" parent="." instance=ExtResource("3_jkir6")]
+position = Vector2(693, 261)
