@@ -61,8 +61,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
-radius = 37.0
-height = 96.0
+radius = 35.0
+height = 90.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_gmlin")
@@ -70,7 +70,7 @@ script = ExtResource("1_gmlin")
 [node name="PlayerAnimation" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -64)
 sprite_frames = SubResource("SpriteFrames_tyixm")
-animation = &"crouch"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]

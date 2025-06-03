@@ -21,29 +21,26 @@ func _physics_process(delta: float) -> void:
 	if position.y >= 10000:
 		get_tree().reload_current_scene()
 
-	if Input.is_action_pressed("Crouch") and is_on_floor():
+	if  is_on_floor() and (Input.is_action_pressed("crouch") || Input.is_action_pressed("move_down")):
 		is_crouching = true
 		$PlayerAnimation.play("crouch")
 	else:
 		is_crouching = false
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and is_on_floor():
 		var cur_jump_velocity = JUMP_VELOCITY
 		if is_crouching:
 			cur_jump_velocity *= POWER_JUMP_FACTOR
 		velocity.y = cur_jump_velocity
 		cur_jump_count += 1
-	elif Input.is_action_just_pressed("ui_accept") and cur_jump_count < JUMP_COUNT:
+	elif Input.is_action_just_pressed("jump") and cur_jump_count < JUMP_COUNT:
 		velocity.y = JUMP_VELOCITY
 		cur_jump_count += 1
 
 	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_left", "ui_right")
-	if not direction:
-		direction = Input.get_axis("Move Left", "Move Right")
-	var is_sprinting = Input.is_action_pressed("Sprint")
+	var direction := Input.get_axis("move_left", "move_right")
+	var is_sprinting = Input.is_action_pressed("sprint")
 	if direction:
 		var cur_speed = SPEED
 		if is_sprinting:
