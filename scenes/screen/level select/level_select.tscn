@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=3 uid="uid://qx3mjuixtfuj"]
+
+[ext_resource type="Script" uid="uid://bca6ne6cob2sl" path="res://scenes/screen/level select/level_select.gd" id="1_648wb"]
+[ext_resource type="Texture2D" uid="uid://wlmjeacidu18" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Backgrounds/Default/background_clouds.png" id="2_bhns1"]
+[ext_resource type="Script" uid="uid://c31abdf0mjr3p" path="res://scenes/screen/menu/background_sprite.gd" id="3_whl2l"]
+
+[node name="Level Select" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_648wb")
+
+[node name="BackgroundSprite" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(563.5, 300)
+scale = Vector2(5.40234, 3.34375)
+texture = ExtResource("2_bhns1")
+script = ExtResource("3_whl2l")
+metadata/_edit_group_ = true
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -140.5
+offset_top = 40.0
+offset_right = 140.5
+offset_bottom = 109.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "Level Select"
+vertical_alignment = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(128, 160)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -80.0
+offset_right = 64.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+follow_focus = true
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer"]
+layout_mode = 2
