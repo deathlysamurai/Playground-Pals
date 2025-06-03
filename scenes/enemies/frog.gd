@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 const MAX_SPEED = 100
 const JUMP_STRENGTH = 500
-const ACCELERATION_SMOOTHING = 20
+const ACCELERATION_SMOOTHING = 10
 
 ## The base delay to the frog making a jump
 @export_range(0.0, 5.0, 0.1,) var jump_delay: float = 2.0
@@ -35,8 +35,6 @@ func _physics_process(delta: float) -> void:
 
 func get_direction_to_player():
 	var player_node = get_tree().get_first_node_in_group("player") as Node2D
-	if player_node != null:
-		var direction = (player_node.global_position - global_position)
-		direction.y = 0
-		return direction.normalized()
-	return Vector2.ZERO
+	if player_node == null:
+		return Vector2.ZERO
+	return (player_node.global_position - global_position).normalized()
