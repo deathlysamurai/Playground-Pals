@@ -1,6 +1,7 @@
 extends Sprite2D
 
 func _ready() -> void:
+	_on_viewport_resize()
 	get_viewport().connect("size_changed", _on_viewport_resize)
 
 func _on_viewport_resize():
