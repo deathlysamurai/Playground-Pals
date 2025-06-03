@@ -15,6 +15,15 @@ run/main_scene="uid://b8jvute32c05i"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[debug]
+
+gdscript/warnings/unused_parameter=0
+
+[global_group]
+
+enemy=""
+player=""
+
 [input]
 
 reset={
@@ -68,6 +77,7 @@ jump={
 2d_physics/layer_1="Environment"
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Items"
+2d_physics/layer_4="Enemy"
 
 [rendering]
 
