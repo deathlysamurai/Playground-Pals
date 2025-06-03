@@ -48,7 +48,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_jksd0"]
 radius = 50.0
 
-[node name="Frog" type="CharacterBody2D"]
+[node name="Frog" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 8
 collision_mask = 9
 script = ExtResource("1_kosjv")
 
@@ -69,3 +70,6 @@ autoplay = "idle"
 [node name="FrogCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -50)
 shape = SubResource("CircleShape2D_jksd0")
+
+[node name="MovementTimer" type="Timer" parent="."]
+one_shot = true
