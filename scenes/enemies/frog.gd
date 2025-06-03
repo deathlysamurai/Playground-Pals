@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-const MAX_SPEED = 100
-const JUMP_STRENGTH = 500
+const MAX_SPEED = 120
+const JUMP_STRENGTH = 400
 const ACCELERATION_SMOOTHING = 10
 
 ## The base delay to the frog making a jump
@@ -25,9 +25,15 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	elif movement_timer.is_stopped(): # Only jump when on ground and timer stopped
 		var direction = get_direction_to_player()
+		if direction.x > 0:
+			$FrogAnimation.flip_h = true
+		else:
+			$FrogAnimation.flip_h = false
+		$FrogAnimation.play("jump")
 		velocity = direction * MAX_SPEED + Vector2.UP * JUMP_STRENGTH
 		movement_timer.start()
 	else:
+		$FrogAnimation.play("idle")
 		velocity = velocity.lerp(Vector2.ZERO, (1 - exp(-ACCELERATION_SMOOTHING * delta)))
 	
 	move_and_slide()

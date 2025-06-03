@@ -1,28 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://h06dc54ft1qa"]
+[gd_scene load_steps=8 format=3 uid="uid://h06dc54ft1qa"]
 
 [ext_resource type="Script" uid="uid://bnt58h4lvq5g0" path="res://scenes/enemies/frog.gd" id="1_kosjv"]
-[ext_resource type="Texture2D" uid="uid://cwb4vjs6xa5t6" path="res://assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-double.png" id="1_lohqt"]
+[ext_resource type="Texture2D" uid="uid://cl61q7xx4kg64" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/frog_idle.png" id="2_5p7qk"]
+[ext_resource type="Texture2D" uid="uid://bmmrm625ehntj" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/frog_rest.png" id="3_jksd0"]
+[ext_resource type="Texture2D" uid="uid://b1esovwac0bat" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/frog_jump.png" id="4_noff5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kosjv"]
-radius = 50.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kosjv"]
-atlas = ExtResource("1_lohqt")
-region = Rect2(640, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lohqt"]
-atlas = ExtResource("1_lohqt")
-region = Rect2(512, 896, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d72w0"]
-atlas = ExtResource("1_lohqt")
-region = Rect2(640, 0, 128, 128)
+radius = 30.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5p7qk"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kosjv")
+"texture": ExtResource("2_5p7qk")
 }],
 "loop": true,
 "name": &"idle",
@@ -30,7 +20,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lohqt")
+"texture": ExtResource("3_jksd0")
 }],
 "loop": true,
 "name": &"idle_jump",
@@ -38,7 +28,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d72w0")
+"texture": ExtResource("4_noff5")
 }],
 "loop": true,
 "name": &"jump",
@@ -46,30 +36,30 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jksd0"]
-radius = 50.0
+radius = 28.0
 
 [node name="Frog" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 8
 collision_mask = 9
 script = ExtResource("1_kosjv")
 
+[node name="MovementTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -50)
+position = Vector2(0, -28)
 shape = SubResource("CircleShape2D_kosjv")
 
 [node name="FrogAnimation" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -63)
+position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_5p7qk")
 animation = &"idle"
 autoplay = "idle"
 
 [node name="FrogCollision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -50)
+position = Vector2(0, -28)
 shape = SubResource("CircleShape2D_jksd0")
-
-[node name="MovementTimer" type="Timer" parent="."]
-one_shot = true
