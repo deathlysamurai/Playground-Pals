@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://c5ectkst4kcax"]
+[gd_scene load_steps=10 format=3 uid="uid://c5ectkst4kcax"]
 
 [ext_resource type="Texture2D" uid="uid://clpe2e68ulmhh" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_front.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://qsvitwyovxj5" path="res://scenes/player/player.gd" id="1_gmlin"]
+[ext_resource type="Texture2D" uid="uid://d22shi53r60pl" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_duck.png" id="2_0owmy"]
 [ext_resource type="Texture2D" uid="uid://qqm0vuou4250" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_idle.png" id="2_gmlin"]
 [ext_resource type="Texture2D" uid="uid://c3exuiy727e2t" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_jump.png" id="4_75vfm"]
 [ext_resource type="Texture2D" uid="uid://dv87c5h45dd62" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_walk_a.png" id="4_p47bc"]
@@ -9,6 +10,14 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tyixm"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0owmy")
+}],
+"loop": true,
+"name": &"crouch",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.5,
 "texture": ExtResource("1_dovo2")
@@ -61,7 +70,7 @@ script = ExtResource("1_gmlin")
 [node name="PlayerAnimation" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -64)
 sprite_frames = SubResource("SpriteFrames_tyixm")
-animation = &"idle"
+animation = &"crouch"
 autoplay = "idle"
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
