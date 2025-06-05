@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dcb1d7ecs1q70" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Tiles/Default/hud_character_6.png" id="7_58nd4"]
 [ext_resource type="Texture2D" uid="uid://3cnig1kkusu6" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Tiles/Default/hud_character_7.png" id="8_c56gm"]
 [ext_resource type="Texture2D" uid="uid://cdeqit7ssangp" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Tiles/Default/hud_character_8.png" id="9_bc8ab"]
-[ext_resource type="Script" uid="uid://smkgeiyne7hb" path="res://resources/number_textures.gd" id="9_vx87r"]
+[ext_resource type="Script" uid="uid://smkgeiyne7hb" path="res://resources/inventory/number_textures.gd" id="9_vx87r"]
 [ext_resource type="Texture2D" uid="uid://do8l0cik1xsf2" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Tiles/Default/hud_character_9.png" id="10_cgjrn"]
 
 [resource]
