@@ -1,28 +1,45 @@
 extends Node
+class_name HealthComponent
+## Provides health information and options for manipulation
 
 signal died
 signal health_changed
 
-@export var max_health: int = 10
-var current_health: int
+var _current_health: int
+
+@export var _max_health: int = 10
+@export_range(0.0, 1.0, 0.05, "or_greater") var _invulnerable_time: float = 0.1
+
+@onready var timer: Timer = $Timer
 
 func _ready() -> void:
-	current_health = max_health
+	_current_health = _max_health
+	timer.wait_time = _invulnerable_time
 
 
+## If the component can be hurt, will subtract [param damage_amount] from [param current_health].
+## Negative damage will heal. Bounded by 0 and [param max_health].
 func damage(damage_amount: int):
-	current_health = max(current_health - damage_amount, 0)
+	if not timer.is_stopped():
+		return
+	timer.start()
+	
+	_current_health = max(_current_health - damage_amount, 0)
+	_current_health = min(_current_health, _max_health)
+	
 	health_changed.emit(self)
 	Callable(check_death).call_deferred()
 
 
-func get_health_percent():
-	if max_health <= 0:
-		return 0
-	return min(current_health / max_health, 1)
+func get_current_health():
+	return _current_health
+
+
+func get_max_health():
+	return _max_health
 
 
 func check_death():
-	if current_health == 0:
+	if _current_health == 0:
 		died.emit(self)
 		owner.queue_free()

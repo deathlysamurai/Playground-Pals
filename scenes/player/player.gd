@@ -55,7 +55,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			$PlayerAnimation.flip_h = 0
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = lerpf(velocity.x, 0.0, (1 - exp(-10 * delta)))
 		if is_on_floor():
 			if not is_crouching:
 				$PlayerAnimation.play("idle")
