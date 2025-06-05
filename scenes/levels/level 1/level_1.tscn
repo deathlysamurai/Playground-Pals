@@ -1,11 +1,19 @@
-[gd_scene load_steps=5 format=4 uid="uid://qer1qjmnvpmn"]
+[gd_scene load_steps=8 format=4 uid="uid://qer1qjmnvpmn"]
 
 [ext_resource type="TileSet" uid="uid://cw3lyx0oi4ur" path="res://resources/tileset.tres" id="1_e1eqq"]
 [ext_resource type="PackedScene" uid="uid://c5ectkst4kcax" path="res://scenes/player/player.tscn" id="2_e1eqq"]
+[ext_resource type="PackedScene" uid="uid://bmg2xrmwbsban" path="res://scenes/manager/inventory_manager.tscn" id="2_tyixm"]
 [ext_resource type="PackedScene" uid="uid://h06dc54ft1qa" path="res://scenes/enemies/frog.tscn" id="3_jkir6"]
 [ext_resource type="PackedScene" uid="uid://d1dyky7fq2mu8" path="res://scenes/ui/hud.tscn" id="4_tad2h"]
+[ext_resource type="PackedScene" uid="uid://d2laumtt8clbt" path="res://scenes/item/key_base.tscn" id="6_70c7p"]
+[ext_resource type="Resource" uid="uid://bgog7npsw6rln" path="res://resources/key_red.tres" id="7_e5aj8"]
 
 [node name="Level 1" type="Node2D"]
+
+[node name="HUD" parent="." node_paths=PackedStringArray("inventory_manager") instance=ExtResource("4_tad2h")]
+inventory_manager = NodePath("../InventoryManager")
+
+[node name="InventoryManager" parent="." instance=ExtResource("2_tyixm")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAADAAgAAAAHAAMAAAACAAgAAAAHAAYAAAABAAgAAAAHAAcAAAATAAcAAAAGAA0AAAASAAgAAAAHAA4AAAARAAkAAAAHAA4AAAAQAAoAAAAHAAYAAAAPAAoAAAAHAAYAAAAOAAoAAAAHAAYAAAANAAoAAAAHAAYAAAAMAAoAAAAHAAYAAAALAAoAAAAHAAYAAAAKAAoAAAAHAAYAAAAKAAUAAAAHAAUAAAAIAAcAAAAHAAQAAAAHAAcAAAAHAAYAAAAGAAcAAAAHAAUAAAAJAAoAAAAHAAYAAAAIAAoAAAAHAAYAAAAHAAoAAAAHAAYAAAAGAAoAAAAHAAYAAAAFAAoAAAAHAAYAAAAEAAoAAAAHAAYAAAADAAoAAAAHAAYAAAACAAoAAAAHAAYAAAABAAoAAAAHAAUAAAAOAA0AAAAHAAUAAAAPAA0AAAAHAAYAAAAQAA0AAAAHAAYAAAARAA0AAAAHAAYAAAASAA0AAAAHAAYAAAATAA0AAAAHAAYAAAAUAA0AAAAHAAQAAAALAAUAAAAHAAYAAAAMAAUAAAAHAAYAAAANAAUAAAAHAAYAAAAOAAUAAAAHAAYAAAAPAAUAAAAHAAYAAAAQAAUAAAAHAAYAAAARAAUAAAAHAAQAAAATAAgAAAAIAAEAAAASAAkAAAAIAAEAAAARAAoAAAAIAAEAAAA=")
@@ -17,4 +25,21 @@ position = Vector2(121, 433)
 [node name="Frog" parent="." instance=ExtResource("3_jkir6")]
 position = Vector2(673, 305)
 
-[node name="HUD" parent="." instance=ExtResource("4_tad2h")]
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="KeyBase" parent="Items" instance=ExtResource("6_70c7p")]
+position = Vector2(878, 275)
+
+[node name="KeyBase2" parent="Items" instance=ExtResource("6_70c7p")]
+position = Vector2(841, 543)
+item_resource = ExtResource("7_e5aj8")
+
+[node name="KeyBase3" parent="Items" instance=ExtResource("6_70c7p")]
+position = Vector2(1062, 275)
+item_resource = ExtResource("7_e5aj8")
+
+[node name="KeyBase4" parent="Items" instance=ExtResource("6_70c7p")]
+position = Vector2(967, 603)
+item_resource = ExtResource("7_e5aj8")

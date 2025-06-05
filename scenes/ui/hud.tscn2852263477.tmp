@@ -52,7 +52,7 @@ texture = ExtResource("3_8qguk")
 layout_mode = 2
 texture = ExtResource("4_136eg")
 
-[node name="InventoryContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="InventoryContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 

@@ -15,6 +15,7 @@ var is_crouching = false
 
 func _ready() -> void:
 	health_component.health_changed.connect(on_health_change)
+	GameEvents.emit_player_health_setup(health_component)
 
 
 func _physics_process(delta: float) -> void:
@@ -77,5 +78,5 @@ func _process(delta: float) -> void:
 		get_tree().reload_current_scene()
 
 
-func on_health_change(health_component: HealthComponent):
+func on_health_change(component: HealthComponent):
 	GameEvents.emit_player_health_changed()
