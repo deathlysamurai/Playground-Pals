@@ -7,8 +7,15 @@ const JUMP_VELOCITY = -400.0
 const POWER_JUMP_FACTOR = 1.25
 const JUMP_COUNT = 2
 
+@onready var health_component: HealthComponent = $HealthComponent
+
 var cur_jump_count = 0
 var is_crouching = false
+
+
+func _ready() -> void:
+	health_component.health_changed.connect(on_health_change)
+
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -68,3 +75,7 @@ func _process(delta: float) -> void:
 	# Reload level
 	if Input.is_action_just_pressed("reset"):
 		get_tree().reload_current_scene()
+
+
+func on_health_change(health_component: HealthComponent):
+	GameEvents.emit_player_health_changed()

@@ -79,10 +79,10 @@ collision_mask = 18
 health_component = NodePath("../../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Visuals/HurtboxComponent"]
-position = Vector2(5, -30)
+position = Vector2(4, -30)
 shape = SubResource("CircleShape2D_5c1ia")
 debug_color = Color(0.405333, 0.990367, 0.502858, 0.419608)
 
 [node name="FrogCollision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -24)
+position = Vector2(0, -25)
 shape = SubResource("CircleShape2D_jksd0")

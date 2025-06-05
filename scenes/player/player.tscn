@@ -105,7 +105,6 @@ shape = SubResource("CapsuleShape2D_je7p5")
 debug_color = Color(0.811765, 0.6, 0.701961, 0.419608)
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, -48)
 shape = SubResource("CapsuleShape2D_dovo2")
 

@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://c85yrb44p4dnb"]
+
+[ext_resource type="Script" uid="uid://oa16ln7jfcoa" path="res://scenes/ui/hud_inventory_item.gd" id="1_due7h"]
+[ext_resource type="Texture2D" uid="uid://bj52gdvfpux54" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Tiles/Default/hud_key_yellow.png" id="1_pp4lw"]
+[ext_resource type="Texture2D" uid="uid://divl1tpug574s" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Tiles/Default/hud_character_multiply.png" id="3_v4n70"]
+[ext_resource type="Texture2D" uid="uid://dyvodlond4b28" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Tiles/Default/hud_character_1.png" id="4_65b3l"]
+
+[node name="HUDInventoryItem" type="HBoxContainer"]
+offset_right = 200.0
+offset_bottom = 64.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+script = ExtResource("1_due7h")
+
+[node name="ItemTexture" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("1_pp4lw")
+expand_mode = 3
+stretch_mode = 3
+
+[node name="CountContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="MultiplierTexture" type="TextureRect" parent="CountContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("3_v4n70")
+expand_mode = 3
+
+[node name="CountTexture" type="TextureRect" parent="CountContainer"]
+layout_mode = 2
+texture = ExtResource("4_65b3l")

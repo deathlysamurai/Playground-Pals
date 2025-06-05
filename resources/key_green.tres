@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryObject" load_steps=4 format=3 uid="uid://bxgaxa5rrjio4"]
+
+[ext_resource type="Texture2D" uid="uid://b5vphn5ab0eyj" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Tiles/Default/hud_key_green.png" id="1_2v375"]
+[ext_resource type="Script" uid="uid://cus8x6wxcem0c" path="res://resources/inventory_object.gd" id="2_307aw"]
+[ext_resource type="Texture2D" uid="uid://bibtndeh4rg8r" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Tiles/Default/key_green.png" id="3_307aw"]
+
+[resource]
+script = ExtResource("2_307aw")
+id = "key_green"
+world_texture = ExtResource("3_307aw")
+hud_texture = ExtResource("1_2v375")

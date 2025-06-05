@@ -34,7 +34,6 @@ func _physics_process(delta: float) -> void:
 		frog_animation.play("jump")
 		velocity = direction * MAX_SPEED + Vector2.UP * JUMP_STRENGTH
 		movement_timer.wait_time = jump_delay * (1 + randf_range(-jump_delay_variation/2, jump_delay_variation/2,))
-		print(movement_timer.wait_time)
 		movement_timer.start()
 	else:
 		frog_animation.play("idle")
