@@ -1,6 +1,10 @@
 extends Node
 class_name InventoryManager
 
+## The inventory is stored as a [param Dictionary] of [param Dictionary]'s.
+## The first key is the [param InventoryObject.id]. the nested keys are
+## "resource" for the [param InventoryObject] itself, and "quantity" for the
+## amount of that item in the inventory.
 var current_inventory: Dictionary = {}
 
 
@@ -31,6 +35,7 @@ func inventory_change():
 	GameEvents.emit_player_inventory_changed(get_current_inventory())
 
 
+## Gets a duplicate reference to the current inventory. Ideally the actual inventory is only manipulated within this class.
 func get_current_inventory():
 	var current_inventory_dupe = current_inventory.duplicate()
 	return current_inventory_dupe

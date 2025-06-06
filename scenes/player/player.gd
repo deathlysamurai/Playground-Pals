@@ -78,5 +78,6 @@ func _process(delta: float) -> void:
 		get_tree().reload_current_scene()
 
 
+## This would be a decent location to add any effects to the player when their health is changed.
 func on_health_change(component: HealthComponent):
 	GameEvents.emit_player_health_changed()

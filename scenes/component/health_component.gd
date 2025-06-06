@@ -2,7 +2,9 @@ extends Node
 class_name HealthComponent
 ## Provides health information and options for manipulation
 
+## Emited when this component falls to or below 0 health.
 signal died
+## Emited whenever this componet adjusts a health value.
 signal health_changed
 
 var _current_health: int
