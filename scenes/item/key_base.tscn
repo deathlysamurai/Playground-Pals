@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2laumtt8clbt"]
+
+[ext_resource type="Script" uid="uid://b33pi0if0eypt" path="res://scenes/item/key_base.gd" id="1_qqo45"]
+[ext_resource type="Texture2D" uid="uid://cnhhrpaggljbf" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Tiles/Default/key_yellow.png" id="2_dchib"]
+[ext_resource type="Resource" uid="uid://castgl8ac5sq7" path="res://resources/inventory/key_yellow.tres" id="2_ppkpr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ppkpr"]
+
+[node name="KeyBase" type="Node2D"]
+script = ExtResource("1_qqo45")
+item_resource = ExtResource("2_ppkpr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_dchib")
+
+[node name="PickupArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea2D"]
+shape = SubResource("CircleShape2D_ppkpr")

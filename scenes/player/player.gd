@@ -7,8 +7,16 @@ const JUMP_VELOCITY = -400.0
 const POWER_JUMP_FACTOR = 1.25
 const JUMP_COUNT = 2
 
+@onready var health_component: HealthComponent = $HealthComponent
+
 var cur_jump_count = 0
 var is_crouching = false
+
+
+func _ready() -> void:
+	health_component.health_changed.connect(on_health_change)
+	GameEvents.emit_player_health_setup(health_component)
+
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -55,7 +63,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			$PlayerAnimation.flip_h = 0
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = lerpf(velocity.x, 0.0, (1 - exp(-10 * delta)))
 		if is_on_floor():
 			if not is_crouching:
 				$PlayerAnimation.play("idle")
@@ -68,3 +76,8 @@ func _process(delta: float) -> void:
 	# Reload level
 	if Input.is_action_just_pressed("reset"):
 		get_tree().reload_current_scene()
+
+
+## This would be a decent location to add any effects to the player when their health is changed.
+func on_health_change(component: HealthComponent):
+	GameEvents.emit_player_health_changed()
