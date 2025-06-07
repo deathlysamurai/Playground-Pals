@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=4 uid="uid://qer1qjmnvpmn"]
+[gd_scene load_steps=12 format=4 uid="uid://qer1qjmnvpmn"]
 
 [ext_resource type="TileSet" uid="uid://cw3lyx0oi4ur" path="res://resources/tileset.tres" id="1_e1eqq"]
 [ext_resource type="PackedScene" uid="uid://c5ectkst4kcax" path="res://scenes/player/player.tscn" id="2_e1eqq"]
+[ext_resource type="PackedScene" uid="uid://6hs8h7kjruje" path="res://scenes/manager/level_manager.tscn" id="2_s13yo"]
 [ext_resource type="PackedScene" uid="uid://bmg2xrmwbsban" path="res://scenes/manager/inventory_manager.tscn" id="2_tyixm"]
 [ext_resource type="PackedScene" uid="uid://h06dc54ft1qa" path="res://scenes/enemies/frog.tscn" id="3_jkir6"]
 [ext_resource type="PackedScene" uid="uid://d1dyky7fq2mu8" path="res://scenes/ui/hud.tscn" id="4_tad2h"]
@@ -15,6 +16,8 @@
 
 [node name="HUD" parent="." node_paths=PackedStringArray("inventory_manager") instance=ExtResource("4_tad2h")]
 inventory_manager = NodePath("../InventoryManager")
+
+[node name="LevelManager" parent="." instance=ExtResource("2_s13yo")]
 
 [node name="InventoryManager" parent="." instance=ExtResource("2_tyixm")]
 
