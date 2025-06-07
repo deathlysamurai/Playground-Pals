@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpog0jm6ydruj"]
+
+[ext_resource type="Texture2D" uid="uid://dabiuagurpx45" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Tiles/Default/hud_player_pink.png" id="1_heg51"]
+
+[node name="HUDPlayerIcon" type="TextureRect"]
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("1_heg51")

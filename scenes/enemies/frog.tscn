@@ -1,12 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://h06dc54ft1qa"]
+[gd_scene load_steps=12 format=3 uid="uid://h06dc54ft1qa"]
 
 [ext_resource type="Script" uid="uid://bnt58h4lvq5g0" path="res://scenes/enemies/frog.gd" id="1_kosjv"]
 [ext_resource type="Texture2D" uid="uid://cl61q7xx4kg64" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/frog_idle.png" id="2_5p7qk"]
+[ext_resource type="PackedScene" uid="uid://bmo6ltw2pfkb0" path="res://scenes/component/health_component.tscn" id="2_jksd0"]
 [ext_resource type="Texture2D" uid="uid://bmmrm625ehntj" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/frog_rest.png" id="3_jksd0"]
+[ext_resource type="PackedScene" uid="uid://c5dc185nhjm7e" path="res://scenes/component/hitbox_component.tscn" id="3_noff5"]
+[ext_resource type="PackedScene" uid="uid://5wi3kpcmihsi" path="res://scenes/component/hurtbox_component.tscn" id="4_5c1ia"]
 [ext_resource type="Texture2D" uid="uid://b1esovwac0bat" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/frog_jump.png" id="4_noff5"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_kosjv"]
-radius = 30.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5p7qk"]
 animations = [{
@@ -35,31 +35,54 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5c1ia"]
+size = Vector2(60, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5c1ia"]
+radius = 24.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_jksd0"]
-radius = 28.0
+radius = 24.0
 
 [node name="Frog" type="CharacterBody2D" groups=["enemy"]]
-collision_layer = 8
-collision_mask = 9
+collision_layer = 16
+collision_mask = 17
 script = ExtResource("1_kosjv")
+jump_delay_variation = 0.4
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_jksd0")]
+_max_health = 1
 
 [node name="MovementTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 0
+[node name="Visuals" type="Node2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -28)
-shape = SubResource("CircleShape2D_kosjv")
-
-[node name="FrogAnimation" type="AnimatedSprite2D" parent="."]
+[node name="FrogAnimation" type="AnimatedSprite2D" parent="Visuals"]
 position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_5p7qk")
 animation = &"idle"
 autoplay = "idle"
 
+[node name="HitboxComponent" parent="Visuals" instance=ExtResource("3_noff5")]
+unique_name_in_owner = true
+damage = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Visuals/HitboxComponent"]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_5c1ia")
+debug_color = Color(0.917647, 0.6, 0.701961, 0.419608)
+
+[node name="HurtboxComponent" parent="Visuals" node_paths=PackedStringArray("health_component") instance=ExtResource("4_5c1ia")]
+unique_name_in_owner = true
+collision_mask = 18
+health_component = NodePath("../../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Visuals/HurtboxComponent"]
+position = Vector2(4, -30)
+shape = SubResource("CircleShape2D_5c1ia")
+debug_color = Color(0.405333, 0.990367, 0.502858, 0.419608)
+
 [node name="FrogCollision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -28)
+position = Vector2(0, -25)
 shape = SubResource("CircleShape2D_jksd0")

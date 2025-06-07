@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryObject" load_steps=3 format=3 uid="uid://b6qhm5tls5jaf"]
+
+[ext_resource type="Texture2D" uid="uid://dtb837g38ayoq" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Tiles/Double/star.png" id="1_xvlrj"]
+[ext_resource type="Script" uid="uid://cus8x6wxcem0c" path="res://resources/inventory/inventory_object.gd" id="2_b1rj3"]
+
+[resource]
+script = ExtResource("2_b1rj3")
+id = "key_blue"
+world_texture = ExtResource("1_xvlrj")
+hud_texture = ExtResource("1_xvlrj")
