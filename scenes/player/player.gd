@@ -15,6 +15,7 @@ var is_crouching = false
 
 func _ready() -> void:
 	health_component.health_changed.connect(on_health_change)
+	health_component.died.connect(on_died)
 	GameEvents.emit_player_health_setup(health_component)
 
 
@@ -81,3 +82,8 @@ func _process(delta: float) -> void:
 ## This would be a decent location to add any effects to the player when their health is changed.
 func on_health_change(component: HealthComponent):
 	GameEvents.emit_player_health_changed()
+
+
+## Place to add any death animations/sounds/events
+func on_died(component: HealthComponent):
+	GameEvents.emit_game_over(false)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://qer1qjmnvpmn"]
+[gd_scene load_steps=13 format=4 uid="uid://qer1qjmnvpmn"]
 
 [ext_resource type="TileSet" uid="uid://cw3lyx0oi4ur" path="res://resources/tileset.tres" id="1_e1eqq"]
 [ext_resource type="PackedScene" uid="uid://c5ectkst4kcax" path="res://scenes/player/player.tscn" id="2_e1eqq"]
@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://cnsudgfi7boal" path="res://resources/inventory/key_blue.tres" id="8_bjle8"]
 [ext_resource type="Resource" uid="uid://bxgaxa5rrjio4" path="res://resources/inventory/key_green.tres" id="9_wls5t"]
 [ext_resource type="PackedScene" uid="uid://k7ej332hsyow" path="res://scenes/item/coin_base.tscn" id="10_wls5t"]
+[ext_resource type="PackedScene" uid="uid://c2xqnsg381n1a" path="res://scenes/item/test_victory.tscn" id="12_i43rp"]
 
 [node name="Level 1" type="Node2D"]
 
@@ -75,3 +76,6 @@ item_resource = ExtResource("9_wls5t")
 [node name="KeyBase8" parent="Items" instance=ExtResource("6_70c7p")]
 position = Vector2(57, 1171)
 item_resource = ExtResource("9_wls5t")
+
+[node name="TestVictory" parent="Items" instance=ExtResource("12_i43rp")]
+position = Vector2(276, 72)
