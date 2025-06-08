@@ -10,16 +10,16 @@ const ACCELERATION_SMOOTHING = 10
 ## Optionally add a percentage variation. Setting 0.5 will allow a random range of -0.25 to +0.25 to the delay timing.
 @export_range(0.0, 1.0, 0.1,) var jump_delay_variation: float = 0.0
 
-@onready var movement_timer = $MovementTimer
+@onready var jump_timer = $JumpTimer
 @onready var frog_animation: AnimatedSprite2D = $Visuals/FrogAnimation
 @onready var hitbox_component: HitboxComponent = %HitboxComponent
 @onready var hurtbox_component: HurtboxComponent = %HurtboxComponent
+@onready var collision_shape_2d: CollisionShape2D = $Visuals/HitboxComponent/CollisionShape2D
 
 
 func _ready() -> void:
-	movement_timer.wait_time = jump_delay
-	movement_timer.start()
-
+	jump_timer.wait_time = jump_delay
+	jump_timer.start()
 
 func _physics_process(delta: float) -> void:
 	# Checks if the entity has fallen too far and removes from game
@@ -29,13 +29,15 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	elif movement_timer.is_stopped(): # Only jump when on ground and timer stopped
+	elif jump_timer.is_stopped(): # Only jump when on ground and timer stopped
+		hitbox_component.enable()
 		var direction = get_direction_to_player()
 		frog_animation.play("jump")
 		velocity = direction * MAX_SPEED + Vector2.UP * JUMP_STRENGTH
-		movement_timer.wait_time = jump_delay * (1 + randf_range(-jump_delay_variation/2, jump_delay_variation/2,))
-		movement_timer.start()
+		jump_timer.wait_time = jump_delay * (1 + randf_range(-jump_delay_variation/2, jump_delay_variation/2,))
+		jump_timer.start()
 	else:
+		hitbox_component.disable()
 		frog_animation.play("idle")
 		velocity = velocity.lerp(Vector2.ZERO, (1 - exp(-ACCELERATION_SMOOTHING * delta)))
 	

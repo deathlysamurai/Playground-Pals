@@ -92,10 +92,11 @@ sprite_frames = SubResource("SpriteFrames_tyixm")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="HitboxComponent" parent="." instance=ExtResource("10_h17s1")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_collision_shape") instance=ExtResource("10_h17s1")]
 visible = false
 collision_layer = 2
 damage = 1
+_collision_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(0, -3)
