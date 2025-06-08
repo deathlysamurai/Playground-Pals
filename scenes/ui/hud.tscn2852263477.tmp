@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1dyky7fq2mu8"]
+
+[ext_resource type="PackedScene" uid="uid://bpog0jm6ydruj" path="res://scenes/ui/player_icon.tscn" id="1_0mwgc"]
+[ext_resource type="Script" uid="uid://crgs0hdcvypy3" path="res://scenes/ui/hud.gd" id="1_oj5la"]
+[ext_resource type="PackedScene" uid="uid://c17y6uetbvoom" path="res://scenes/ui/hud_heart_icon.tscn" id="2_hqnrr"]
+[ext_resource type="Texture2D" uid="uid://doymxqc6aw01m" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Tiles/Default/hud_heart_half.png" id="3_8qguk"]
+[ext_resource type="Texture2D" uid="uid://u81q10atmg63" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Tiles/Default/hud_heart_empty.png" id="4_136eg"]
+[ext_resource type="PackedScene" uid="uid://c85yrb44p4dnb" path="res://scenes/ui/hud_inventory_item.tscn" id="5_136eg"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_oj5la")
+player_icon_scene = ExtResource("1_0mwgc")
+heart_icon_scene = ExtResource("2_hqnrr")
+inventory_item_scene = ExtResource("5_136eg")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="StatusContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 60)
+layout_mode = 2
+
+[node name="HUDPlayerIcon" parent="MarginContainer/VBoxContainer/StatusContainer" instance=ExtResource("1_0mwgc")]
+layout_mode = 2
+
+[node name="HeartIconContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatusContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HUDHeartIcon" parent="MarginContainer/VBoxContainer/StatusContainer/HeartIconContainer" instance=ExtResource("2_hqnrr")]
+layout_mode = 2
+
+[node name="HUDHeartIcon2" parent="MarginContainer/VBoxContainer/StatusContainer/HeartIconContainer" instance=ExtResource("2_hqnrr")]
+layout_mode = 2
+texture = ExtResource("3_8qguk")
+
+[node name="HUDHeartIcon3" parent="MarginContainer/VBoxContainer/StatusContainer/HeartIconContainer" instance=ExtResource("2_hqnrr")]
+layout_mode = 2
+texture = ExtResource("4_136eg")
+
+[node name="InventoryContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HUDInventoryItem" parent="MarginContainer/VBoxContainer/InventoryContainer" instance=ExtResource("5_136eg")]
+layout_mode = 2

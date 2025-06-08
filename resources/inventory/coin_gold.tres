@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="InventoryObjectAnimated" load_steps=5 format=3 uid="uid://c3yscs6t7t3yo"]
+
+[ext_resource type="Texture2D" uid="uid://8h2f04suxdrp" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Tiles/Default/hud_coin.png" id="1_5qq38"]
+[ext_resource type="Script" uid="uid://vg6gidexc0i0" path="res://resources/inventory/inventory_object_animated.gd" id="2_uy50w"]
+[ext_resource type="Texture2D" uid="uid://csc0i2d2crpnq" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Tiles/Default/coin_gold.png" id="3_pff2b"]
+[ext_resource type="Texture2D" uid="uid://2vverqqf0je7" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Tiles/Default/coin_gold_side.png" id="4_j7nqr"]
+
+[resource]
+script = ExtResource("2_uy50w")
+world_texture_2 = ExtResource("4_j7nqr")
+id = "coin_gold"
+world_texture = ExtResource("3_pff2b")
+hud_texture = ExtResource("1_5qq38")

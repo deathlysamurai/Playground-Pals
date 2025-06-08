@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://c17y6uetbvoom"]
+
+[ext_resource type="Texture2D" uid="uid://d3c160b4sv4k5" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Tiles/Default/hud_heart.png" id="1_bpok2"]
+[ext_resource type="Script" uid="uid://tuag2myc4174" path="res://scenes/ui/hud_heart_icon.gd" id="2_pvxgl"]
+[ext_resource type="Texture2D" uid="uid://u81q10atmg63" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Tiles/Default/hud_heart_empty.png" id="3_vmbnc"]
+[ext_resource type="Texture2D" uid="uid://doymxqc6aw01m" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Tiles/Default/hud_heart_half.png" id="4_pucyp"]
+
+[node name="HUDHeartIcon" type="TextureRect"]
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("1_bpok2")
+script = ExtResource("2_pvxgl")
+empty_container = ExtResource("3_vmbnc")
+half_container = ExtResource("4_pucyp")
+full_container = ExtResource("1_bpok2")

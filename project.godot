@@ -15,6 +15,10 @@ run/main_scene="uid://b8jvute32c05i"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameEvents="*res://scenes/autoload/game_events.tscn"
+
 [debug]
 
 gdscript/warnings/unused_parameter=0
@@ -78,6 +82,8 @@ jump={
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Items"
 2d_physics/layer_4="Enemy"
+2d_physics/layer_5="EntityCollision"
+2d_physics/layer_6="Hazard"
 
 [rendering]
 
