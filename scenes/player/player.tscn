@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c5ectkst4kcax"]
+[gd_scene load_steps=17 format=3 uid="uid://c5ectkst4kcax"]
 
 [ext_resource type="Texture2D" uid="uid://clpe2e68ulmhh" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_front.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://qsvitwyovxj5" path="res://scenes/player/player.gd" id="1_gmlin"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bmo6ltw2pfkb0" path="res://scenes/component/health_component.tscn" id="2_5gtgg"]
 [ext_resource type="Texture2D" uid="uid://qqm0vuou4250" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_idle.png" id="2_gmlin"]
 [ext_resource type="Texture2D" uid="uid://c3exuiy727e2t" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_jump.png" id="4_75vfm"]
+[ext_resource type="Texture2D" uid="uid://dr1cf0suwtfow" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_hit.png" id="4_je7p5"]
 [ext_resource type="Texture2D" uid="uid://dv87c5h45dd62" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_walk_a.png" id="4_p47bc"]
 [ext_resource type="Texture2D" uid="uid://cusu2d4na3q6p" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_walk_b.png" id="5_75vfm"]
 [ext_resource type="PackedScene" uid="uid://5wi3kpcmihsi" path="res://scenes/component/hurtbox_component.tscn" id="9_h17s1"]
@@ -19,6 +20,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"crouch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 4.0,
+"texture": ExtResource("4_je7p5")
+}],
+"loop": true,
+"name": &"hurt",
 "speed": 5.0
 }, {
 "frames": [{
@@ -85,11 +94,12 @@ script = ExtResource("1_gmlin")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_5gtgg")]
 _max_health = 6
+_invulnerable_time = 0.15
 
 [node name="PlayerAnimation" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -64)
 sprite_frames = SubResource("SpriteFrames_tyixm")
-animation = &"jump"
+animation = &"hurt"
 autoplay = "idle"
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_collision_shape") instance=ExtResource("10_h17s1")]
