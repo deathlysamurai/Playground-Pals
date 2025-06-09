@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://k7ej332hsyow"]
 
-[ext_resource type="Script" uid="uid://dl4382ovxqtbu" path="res://scenes/item/coin_base.gd" id="1_mbvuq"]
+[ext_resource type="Script" uid="uid://dl4382ovxqtbu" path="res://scenes/item/animated_item.gd" id="1_mbvuq"]
 [ext_resource type="Resource" uid="uid://c3yscs6t7t3yo" path="res://resources/inventory/coin_gold.tres" id="2_vliu4"]
 [ext_resource type="Texture2D" uid="uid://b8hfj5qkyy713" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Tiles/Default/coin_bronze.png" id="3_vliu4"]
 
@@ -22,7 +22,7 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ppkpr"]
 
-[node name="CoinBase" type="Node2D"]
+[node name="AnimatedItem" type="Node2D"]
 script = ExtResource("1_mbvuq")
 item_resource = ExtResource("2_vliu4")
 

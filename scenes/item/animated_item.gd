@@ -9,6 +9,7 @@ extends Node2D
 func _ready() -> void:
 	$PickupArea2D.area_entered.connect(on_area_entered, CONNECT_ONE_SHOT)
 	
+	# Builds an animation from the item_resource's textures.
 	animated_sprite.sprite_frames.add_frame("default", item_resource.world_texture, .75)
 	animated_sprite.sprite_frames.add_frame("default", item_resource.world_texture_2, .75)
 	animated_sprite.play("default")

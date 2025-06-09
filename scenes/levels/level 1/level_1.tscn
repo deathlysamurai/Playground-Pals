@@ -6,11 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://bmg2xrmwbsban" path="res://scenes/manager/inventory_manager.tscn" id="2_tyixm"]
 [ext_resource type="PackedScene" uid="uid://h06dc54ft1qa" path="res://scenes/enemies/frog.tscn" id="3_jkir6"]
 [ext_resource type="PackedScene" uid="uid://d1dyky7fq2mu8" path="res://scenes/ui/hud.tscn" id="4_tad2h"]
-[ext_resource type="PackedScene" uid="uid://d2laumtt8clbt" path="res://scenes/item/key_base.tscn" id="6_70c7p"]
+[ext_resource type="PackedScene" uid="uid://d2laumtt8clbt" path="res://scenes/item/static_item.tscn" id="6_70c7p"]
 [ext_resource type="Resource" uid="uid://bgog7npsw6rln" path="res://resources/inventory/key_red.tres" id="7_e5aj8"]
 [ext_resource type="Resource" uid="uid://cnsudgfi7boal" path="res://resources/inventory/key_blue.tres" id="8_bjle8"]
 [ext_resource type="Resource" uid="uid://bxgaxa5rrjio4" path="res://resources/inventory/key_green.tres" id="9_wls5t"]
-[ext_resource type="PackedScene" uid="uid://k7ej332hsyow" path="res://scenes/item/coin_base.tscn" id="10_wls5t"]
+[ext_resource type="PackedScene" uid="uid://k7ej332hsyow" path="res://scenes/item/animated_item.tscn" id="10_wls5t"]
 [ext_resource type="PackedScene" uid="uid://c2xqnsg381n1a" path="res://scenes/item/test_victory.tscn" id="12_i43rp"]
 
 [node name="Level 1" type="Node2D"]
