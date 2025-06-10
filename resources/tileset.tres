@@ -1,6 +1,7 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cw3lyx0oi4ur"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://cw3lyx0oi4ur"]
 
 [ext_resource type="Texture2D" uid="uid://c7x7slgruoek1" path="res://assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png" id="1_qp2yk"]
+[ext_resource type="PackedScene" uid="uid://cpxx6rjlrahat" path="res://scenes/item/blocks/coin_block.tscn" id="2_81yw3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e1eqq"]
 resource_name = "kenny_terrain"
@@ -727,6 +728,10 @@ texture_region_size = Vector2i(64, 64)
 15:17/0 = 0
 16:17/0 = 0
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_vgpmu"]
+resource_name = "Item Blocks"
+scenes/1/scene = ExtResource("2_81yw3")
+
 [resource]
 tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 1
@@ -743,3 +748,4 @@ terrain_set_0/terrain_3/color = Color(0.767712, 0.720103, 0.426459, 1)
 terrain_set_0/terrain_4/name = "Rock"
 terrain_set_0/terrain_4/color = Color(0.224331, 0.267622, 0.550042, 1)
 sources/0 = SubResource("TileSetAtlasSource_e1eqq")
+sources/1 = SubResource("TileSetScenesCollectionSource_vgpmu")

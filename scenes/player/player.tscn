@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c5ectkst4kcax"]
+[gd_scene load_steps=18 format=3 uid="uid://c5ectkst4kcax"]
 
 [ext_resource type="Texture2D" uid="uid://clpe2e68ulmhh" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_front.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://qsvitwyovxj5" path="res://scenes/player/player.gd" id="1_gmlin"]
@@ -87,6 +87,10 @@ height = 90.0
 radius = 40.0
 height = 100.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fm80t"]
+radius = 27.0
+height = 94.0
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 0
 collision_mask = 17
@@ -140,3 +144,11 @@ collision_mask = 0
 position = Vector2(0, -48)
 shape = SubResource("CapsuleShape2D_h17s1")
 debug_color = Color(0.798646, 0.775008, 0.340864, 0.42)
+
+[node name="ItemBoxArea2D" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemBoxArea2D"]
+position = Vector2(0, -54)
+shape = SubResource("CapsuleShape2D_fm80t")

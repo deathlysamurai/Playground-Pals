@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpxx6rjlrahat"]
+
+[ext_resource type="PackedScene" uid="uid://bsn51tf625ej0" path="res://scenes/item/blocks/item_block.tscn" id="1_ykpyy"]
+
+[node name="CoinBlock" instance=ExtResource("1_ykpyy")]

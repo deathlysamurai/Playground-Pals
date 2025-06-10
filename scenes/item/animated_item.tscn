@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://k7ej332hsyow"]
+[gd_scene load_steps=6 format=3 uid="uid://c3jhm7sck1126"]
 
 [ext_resource type="Script" uid="uid://dl4382ovxqtbu" path="res://scenes/item/animated_item.gd" id="1_mbvuq"]
 [ext_resource type="Resource" uid="uid://c3yscs6t7t3yo" path="res://resources/inventory/coin_gold.tres" id="2_vliu4"]
