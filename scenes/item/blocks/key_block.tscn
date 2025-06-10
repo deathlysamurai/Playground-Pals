@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c1t1xay2g23n3"]
 
 [ext_resource type="PackedScene" uid="uid://bsn51tf625ej0" path="res://scenes/item/blocks/item_block.tscn" id="1_pdlp5"]
-[ext_resource type="PackedScene" path="res://scenes/item/key_base.tscn" id="2_5nbtt"]
+[ext_resource type="PackedScene" uid="uid://d2laumtt8clbt" path="res://scenes/item/static_item.tscn" id="2_pdlp5"]
 
 [node name="KeyBlock" instance=ExtResource("1_pdlp5")]
-spawned_item = ExtResource("2_5nbtt")
+spawned_item = ExtResource("2_pdlp5")
