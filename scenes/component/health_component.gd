@@ -6,6 +6,8 @@ class_name HealthComponent
 signal died
 ## Emited whenever this componet adjusts a health value.
 signal health_changed
+## Emited when invulerable time has elapsed.
+signal vulnerable
 
 var _current_health: int
 
@@ -17,6 +19,7 @@ var _current_health: int
 func _ready() -> void:
 	_current_health = _max_health
 	timer.wait_time = _invulnerable_time
+	timer.timeout.connect(vulnerable.emit)
 
 
 ## If the component can be hurt, will subtract [param damage_amount] from [param current_health].
@@ -34,7 +37,7 @@ func damage(damage_amount: int):
 	_current_health = max(_current_health - damage_amount, 0)
 	_current_health = min(_current_health, max_health_adjusted)
 	
-	health_changed.emit(self)
+	health_changed.emit(damage_amount)
 	Callable(check_death).call_deferred()
 
 
@@ -48,5 +51,5 @@ func get_max_health():
 
 func check_death():
 	if _current_health == 0:
-		died.emit(self)
+		died.emit()
 		owner.queue_free()

@@ -53,7 +53,7 @@ jump_delay_variation = 0.4
 [node name="HealthComponent" parent="." instance=ExtResource("2_jksd0")]
 _max_health = 1
 
-[node name="MovementTimer" type="Timer" parent="."]
+[node name="JumpTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="Visuals" type="Node2D" parent="."]
@@ -64,9 +64,10 @@ sprite_frames = SubResource("SpriteFrames_5p7qk")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="HitboxComponent" parent="Visuals" instance=ExtResource("3_noff5")]
+[node name="HitboxComponent" parent="Visuals" node_paths=PackedStringArray("_collision_shape") instance=ExtResource("3_noff5")]
 unique_name_in_owner = true
 damage = 1
+_collision_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Visuals/HitboxComponent"]
 position = Vector2(0, -5)
