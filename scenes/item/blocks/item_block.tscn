@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsn51tf625ej0"]
+
+[ext_resource type="PackedScene" uid="uid://dqymxgqo8vauo" path="res://scenes/item/blocks/block.tscn" id="1_0tw7s"]
+[ext_resource type="Script" uid="uid://dhacu1hjjachh" path="res://scenes/item/blocks/item_block.gd" id="1_amvfi"]
+[ext_resource type="PackedScene" uid="uid://c3jhm7sck1126" path="res://scenes/item/coin_base.tscn" id="3_n0u07"]
+
+[node name="ItemBlock" instance=ExtResource("1_0tw7s")]
+script = ExtResource("1_amvfi")
+gravity = 3600.0
+initial_bounce_y_speed = -360.0
+spawned_item = ExtResource("3_n0u07")
+
+[node name="BounceTimer" type="Timer" parent="." index="2"]
+wait_time = 0.133
+one_shot = true
