@@ -12,6 +12,7 @@ offset_bottom = 64.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_filter = 2
+theme_override_constants/separation = -16
 script = ExtResource("1_due7h")
 number_texture = ExtResource("2_v4n70")
 
@@ -27,6 +28,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_filter = 2
+theme_override_constants/separation = -24
 
 [node name="MultiplierTexture" type="TextureRect" parent="CountContainer"]
 custom_minimum_size = Vector2(32, 32)
@@ -34,6 +36,16 @@ layout_mode = 2
 texture = ExtResource("3_v4n70")
 expand_mode = 3
 
-[node name="CountTexture" type="TextureRect" parent="CountContainer"]
+[node name="DigitsContainer" type="HBoxContainer" parent="CountContainer"]
+layout_mode = 2
+theme_override_constants/separation = -32
+
+[node name="TensCountTexture" type="TextureRect" parent="CountContainer/DigitsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("4_65b3l")
+
+[node name="OnesCountTexture" type="TextureRect" parent="CountContainer/DigitsContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("4_65b3l")

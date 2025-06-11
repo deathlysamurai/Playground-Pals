@@ -20,9 +20,10 @@ func _ready() -> void:
 	%OptionsButton.pressed.connect(on_options_button_pressed)
 	%QuitButton.pressed.connect(on_quit_button_pressed)
 	
-	var level_name = get_parent().owner.name
-	if level_name == null: return
-	description_label.text = level_name
+	var level_name
+	if get_parent().owner: # Check that the scene is correctly added as a child
+		level_name = get_parent().owner.name
+		description_label.text = level_name
 
 
 func _process(delta: float) -> void:

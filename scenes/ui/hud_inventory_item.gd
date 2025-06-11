@@ -4,7 +4,8 @@ extends HBoxContainer
 
 @onready var item_texture: TextureRect = $ItemTexture
 @onready var count_container: HBoxContainer = $CountContainer
-@onready var count_texture: TextureRect = $CountContainer/CountTexture
+@onready var ones_count_texture: TextureRect = %OnesCountTexture
+@onready var tens_count_texture: TextureRect = %TensCountTexture
 
 
 func update_item_display(item: InventoryObject, current_inventory: Dictionary):
@@ -13,11 +14,19 @@ func update_item_display(item: InventoryObject, current_inventory: Dictionary):
 	update_count(count)
 
 
+## Updates the number textures. No multiplier if the count is only 1.
+## Starts as a single digit, adds second digit only at 10-99. Cap of 99.
 func update_count(count: int): 
-	count = min(count, 9) # Maximum of 9 until/unless handling 10s places, etc, is introduced
-	if count > 1:
+	count = min(count, 99)
+	if count > 9:
 		toggle_counter(true)
-		count_texture.texture = number_texture.numbers[count]
+		tens_count_texture.texture = number_texture.numbers[count / 10]
+		ones_count_texture.texture = number_texture.numbers[count % 10]
+		tens_count_texture.visible = true
+	elif count > 1:
+		toggle_counter(true)
+		ones_count_texture.texture = number_texture.numbers[count]
+		tens_count_texture.visible = false
 	else:
 		toggle_counter(false)
 

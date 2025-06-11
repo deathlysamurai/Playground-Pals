@@ -47,6 +47,11 @@ position = Vector2(1990, 108)
 
 [node name="CoinBase" parent="Items" instance=ExtResource("10_wls5t")]
 position = Vector2(471, 396)
+count = 9
+
+[node name="CoinBase2" parent="Items" instance=ExtResource("10_wls5t")]
+position = Vector2(673, 576)
+count = 9
 
 [node name="KeyBase" parent="Items" instance=ExtResource("6_70c7p")]
 position = Vector2(1246, 428)
