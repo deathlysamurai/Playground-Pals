@@ -9,7 +9,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if Input.is_action_pressed("pause"):
+	if Input.is_action_just_pressed("pause"):
 		if pause_screen_scene == null: return
 		var pause_screen_instance = pause_screen_scene.instantiate()
 		add_child(pause_screen_instance)
