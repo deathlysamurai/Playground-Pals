@@ -1,8 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://6hs8h7kjruje"]
+[gd_scene load_steps=4 format=3 uid="uid://6hs8h7kjruje"]
 
 [ext_resource type="Script" uid="uid://cetqpk35lgq0y" path="res://scenes/manager/level_manager.gd" id="1_e3djy"]
 [ext_resource type="PackedScene" uid="uid://c2f6b3cfl3oi1" path="res://scenes/ui/end_screen.tscn" id="2_1bs8u"]
+[ext_resource type="PackedScene" uid="uid://copkir107fge" path="res://scenes/ui/pause_menu.tscn" id="3_15wy8"]
 
 [node name="LevelManager" type="Node"]
 script = ExtResource("1_e3djy")
 end_screen_scene = ExtResource("2_1bs8u")
+pause_screen_scene = ExtResource("3_15wy8")
