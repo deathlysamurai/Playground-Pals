@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6dk7euvracxv"]
+
+[ext_resource type="PackedScene" uid="uid://dqymxgqo8vauo" path="res://scenes/item/blocks/block.tscn" id="1_0imo0"]
+[ext_resource type="Script" uid="uid://bn6vevlv0mkm3" path="res://scenes/item/blocks/lock_block.gd" id="2_ygj2o"]
+[ext_resource type="Texture2D" uid="uid://bmljh1ywpct1b" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Tiles/Default/lock_yellow.png" id="3_opxq4"]
+
+[node name="LockBlock" instance=ExtResource("1_0imo0")]
+script = ExtResource("2_ygj2o")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("3_opxq4")
+
+[node name="Area2D" parent="." index="2"]
+collision_mask = 128
