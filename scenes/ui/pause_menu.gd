@@ -24,6 +24,9 @@ func _ready() -> void:
 	if get_parent().owner: # Check that the scene is correctly added as a child
 		level_name = get_parent().owner.name
 		description_label.text = level_name
+	
+	restart_button.grab_focus()
+
 
 
 func _process(delta: float) -> void:
