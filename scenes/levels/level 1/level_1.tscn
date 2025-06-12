@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://cw3lyx0oi4ur" path="res://resources/tileset.tres" id="1_e1eqq"]
 [ext_resource type="PackedScene" uid="uid://c5ectkst4kcax" path="res://scenes/player/player.tscn" id="2_e1eqq"]
-[ext_resource type="PackedScene" path="res://scenes/manager/level_manager.tscn" id="2_s13yo"]
+[ext_resource type="PackedScene" uid="uid://6hs8h7kjruje" path="res://scenes/manager/level_manager.tscn" id="2_s13yo"]
 [ext_resource type="PackedScene" uid="uid://bmg2xrmwbsban" path="res://scenes/manager/inventory_manager.tscn" id="2_tyixm"]
 [ext_resource type="PackedScene" uid="uid://h06dc54ft1qa" path="res://scenes/enemies/frog.tscn" id="3_jkir6"]
 [ext_resource type="PackedScene" uid="uid://d1dyky7fq2mu8" path="res://scenes/ui/hud.tscn" id="4_tad2h"]
@@ -11,7 +11,7 @@
 [ext_resource type="Resource" uid="uid://cnsudgfi7boal" path="res://resources/inventory/key_blue.tres" id="8_bjle8"]
 [ext_resource type="Resource" uid="uid://bxgaxa5rrjio4" path="res://resources/inventory/key_green.tres" id="9_wls5t"]
 [ext_resource type="PackedScene" uid="uid://c3jhm7sck1126" path="res://scenes/item/animated_item.tscn" id="10_wls5t"]
-[ext_resource type="PackedScene" path="res://scenes/item/test_victory.tscn" id="12_i43rp"]
+[ext_resource type="PackedScene" uid="uid://c2xqnsg381n1a" path="res://scenes/item/test_victory.tscn" id="12_i43rp"]
 
 [node name="Level 1" type="Node2D"]
 
@@ -47,6 +47,11 @@ position = Vector2(1990, 108)
 
 [node name="CoinBase" parent="Items" instance=ExtResource("10_wls5t")]
 position = Vector2(471, 396)
+count = 9
+
+[node name="CoinBase2" parent="Items" instance=ExtResource("10_wls5t")]
+position = Vector2(673, 576)
+count = 9
 
 [node name="KeyBase" parent="Items" instance=ExtResource("6_70c7p")]
 position = Vector2(1246, 428)

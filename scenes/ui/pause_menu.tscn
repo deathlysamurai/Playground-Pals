@@ -1,0 +1,79 @@
+[gd_scene load_steps=3 format=3 uid="uid://copkir107fge"]
+
+[ext_resource type="Script" uid="uid://7kxdjxwiyapx" path="res://scenes/ui/pause_menu.gd" id="1_6tw0m"]
+[ext_resource type="PackedScene" uid="uid://qx3mjuixtfuj" path="res://scenes/screen/level select/level_select.tscn" id="2_0lmf7"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 2
+script = ExtResource("1_6tw0m")
+menu_scene = ExtResource("2_0lmf7")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+process_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+process_mode = 2
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+process_mode = 2
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="TextVBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
+process_mode = 2
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/TextVBoxContainer"]
+unique_name_in_owner = true
+process_mode = 2
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/TextVBoxContainer"]
+unique_name_in_owner = true
+process_mode = 2
+layout_mode = 2
+text = "Current Level"
+horizontal_alignment = 1
+
+[node name="ButtonVBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/TextVBoxContainer"]
+process_mode = 2
+layout_mode = 2
+
+[node name="RestartButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/TextVBoxContainer/ButtonVBoxContainer"]
+unique_name_in_owner = true
+process_mode = 2
+layout_mode = 2
+text = "Retry"
+
+[node name="MenuButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/TextVBoxContainer/ButtonVBoxContainer"]
+unique_name_in_owner = true
+process_mode = 2
+layout_mode = 2
+text = "Level Select"
+
+[node name="OptionsButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/TextVBoxContainer/ButtonVBoxContainer"]
+unique_name_in_owner = true
+process_mode = 2
+layout_mode = 2
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/TextVBoxContainer/ButtonVBoxContainer"]
+unique_name_in_owner = true
+process_mode = 2
+layout_mode = 2
+text = "Quit"
