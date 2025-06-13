@@ -11,7 +11,7 @@ const ACCELERATION_SMOOTHING = 10
 @export_range(0.0, 1.0, 0.1,) var jump_delay_variation: float = 0.0
 
 @onready var jump_timer = $JumpTimer
-@onready var frog_animation: AnimatedSprite2D = $Visuals/FrogAnimation
+@onready var animated_sprite: AnimatedSprite2D = $Visuals/AnimatedSprite2D
 @onready var hitbox_component: HitboxComponent = %HitboxComponent
 @onready var hurtbox_component: HurtboxComponent = %HurtboxComponent
 @onready var collision_shape_2d: CollisionShape2D = $Visuals/HitboxComponent/CollisionShape2D
@@ -32,13 +32,13 @@ func _physics_process(delta: float) -> void:
 	elif jump_timer.is_stopped(): # Only jump when on ground and timer stopped
 		hitbox_component.enable()
 		var direction = get_direction_to_player()
-		frog_animation.play("jump")
+		animated_sprite.play("jump")
 		velocity = direction * MAX_SPEED + Vector2.UP * JUMP_STRENGTH
 		jump_timer.wait_time = jump_delay * (1 + randf_range(-jump_delay_variation/2, jump_delay_variation/2,))
 		jump_timer.start()
 	else:
 		hitbox_component.disable()
-		frog_animation.play("idle")
+		animated_sprite.play("idle")
 		velocity = velocity.lerp(Vector2.ZERO, (1 - exp(-ACCELERATION_SMOOTHING * delta)))
 	
 	move_and_slide()

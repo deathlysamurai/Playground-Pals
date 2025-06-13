@@ -14,5 +14,5 @@ func on_area_entered(other_area: Area2D):
 	if not other_area is HitboxComponent:
 		return
 	var hitbox_component = other_area as HitboxComponent
-	print(owner.name + " hurt by " + other_area.owner.name + " for " + str(hitbox_component.damage))
+	#print(owner.name + " hurt by " + other_area.owner.name + " for " + str(hitbox_component.damage))
 	health_component.damage(hitbox_component.damage)
