@@ -1,8 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://c1k3qxu5powwu"]
+[gd_scene load_steps=20 format=3 uid="uid://c1k3qxu5powwu"]
 
 [ext_resource type="PackedScene" uid="uid://bmo6ltw2pfkb0" path="res://scenes/component/health_component.tscn" id="1_k47sx"]
 [ext_resource type="Script" uid="uid://cbug5dckd7p7h" path="res://scenes/enemies/mouse.gd" id="1_of327"]
+[ext_resource type="PackedScene" uid="uid://s8bt3htks3k6" path="res://scenes/component/hit_flash_component.tscn" id="3_ayis6"]
 [ext_resource type="Texture2D" uid="uid://cjlqwx6mpnah" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/mouse_rest.png" id="3_c6iqt"]
+[ext_resource type="PackedScene" uid="uid://bi2swldpe8y1" path="res://scenes/component/death_component.tscn" id="3_hekhp"]
+[ext_resource type="Shader" uid="uid://ckn7s0xc8bos3" path="res://scenes/component/hit_flash_component.gdshader" id="4_ayis6"]
 [ext_resource type="Texture2D" uid="uid://ds6befviwpkw5" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/mouse_walk_a.png" id="4_k47sx"]
 [ext_resource type="Texture2D" uid="uid://cq2j5l14cije8" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/mouse_walk_b.png" id="5_of327"]
 [ext_resource type="PackedScene" uid="uid://5wi3kpcmihsi" path="res://scenes/component/hurtbox_component.tscn" id="6_374yj"]
@@ -11,6 +14,11 @@
 [ext_resource type="Script" uid="uid://cgm4awknovy8v" path="res://scenes/states/enemy_idle.gd" id="8_fi75b"]
 [ext_resource type="Script" uid="uid://butttlkrq10lv" path="res://scenes/states/enemy_chase.gd" id="9_e2yb0"]
 [ext_resource type="Script" uid="uid://de02rfx00xllq" path="res://scenes/states/enemy_wander.gd" id="10_p215p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hekhp"]
+resource_local_to_scene = true
+shader = ExtResource("4_ayis6")
+shader_parameter/lerp_percent = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_s64ei"]
 animations = [{
@@ -58,13 +66,21 @@ script = ExtResource("1_of327")
 [node name="HealthComponent" parent="." instance=ExtResource("1_k47sx")]
 _max_health = 2
 
+[node name="DeathComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("3_hekhp")]
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../Visuals/AnimatedSprite2D")
+
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("3_ayis6")]
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../Visuals/AnimatedSprite2D")
+hit_flash_material = SubResource("ShaderMaterial_hekhp")
+
 [node name="Visuals" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
 sprite_frames = SubResource("SpriteFrames_s64ei")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.794453
 offset = Vector2(0, -31)
 
 [node name="HitboxComponent" parent="Visuals" node_paths=PackedStringArray("_collision_shape") instance=ExtResource("6_of327")]

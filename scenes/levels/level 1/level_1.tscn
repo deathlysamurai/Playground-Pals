@@ -31,7 +31,7 @@ tile_set = ExtResource("1_e1eqq")
 [node name="Player" parent="." instance=ExtResource("2_e1eqq")]
 position = Vector2(121, 433)
 
-[node name="Entities" type="Node2D" parent="."]
+[node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
 
 [node name="Frog" parent="Entities" instance=ExtResource("3_jkir6")]
 position = Vector2(673, 305)

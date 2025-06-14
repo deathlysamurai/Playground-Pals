@@ -98,7 +98,7 @@ func bounce_from_hit(direction: Vector2, toward_direction: bool):
 	var move_sign = 1.0
 	if !toward_direction:
 		move_sign = -1
-	velocity += move_sign * direction.normalized() * 600
+	velocity = move_sign * direction.normalized() * 600
 
 
 ## This would be a decent location to add any effects to the player when their health is changed.
