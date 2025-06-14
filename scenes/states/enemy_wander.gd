@@ -2,13 +2,13 @@ extends State
 class_name EnemyWander
 
 ## State to use after wandering time ends.
-@export var idle_state: State
-## State to use when player is closer that [param chase_start_distance].
-@export var chase_state: State
+@export var stop_wander_state: State
+## State to use when player is closer that [param alert_distance].
+@export var alerted_state: State
 @export var minimum_wander: float = 4
 @export var maximum_wander: float = 8
 @export var move_speed: float = 15.0
-@export var chase_start_distance: float = 64 * 4 # 64px per tile, 4 tiles away
+@export var alert_distance: float = 64 * 4 # 64px per tile, 4 tiles away
 
 var move_direction: Vector2
 var wander_time: float
@@ -26,13 +26,13 @@ func enter():
 
 
 func update(delta: float):
-	if player.global_position.distance_squared_to(parent.global_position) < pow(chase_start_distance, 2):
-		transition.emit(self, chase_state.name)
+	if player.global_position.distance_squared_to(parent.global_position) < pow(alert_distance, 2):
+		transition.emit(self, alerted_state.name)
 		return
 	if wander_time > 0:
 		wander_time -= delta
 	else:
-		transition.emit(self, idle_state.name)
+		transition.emit(self, stop_wander_state.name)
 
 
 func physics_update(delta: float):
