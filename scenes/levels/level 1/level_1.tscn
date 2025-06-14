@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://qer1qjmnvpmn"]
+[gd_scene load_steps=15 format=4 uid="uid://qer1qjmnvpmn"]
 
 [ext_resource type="TileSet" uid="uid://cw3lyx0oi4ur" path="res://resources/tileset.tres" id="1_e1eqq"]
 [ext_resource type="PackedScene" uid="uid://c5ectkst4kcax" path="res://scenes/player/player.tscn" id="2_e1eqq"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d2laumtt8clbt" path="res://scenes/item/static_item.tscn" id="6_70c7p"]
 [ext_resource type="Resource" uid="uid://bgog7npsw6rln" path="res://resources/inventory/key_red.tres" id="7_e5aj8"]
 [ext_resource type="PackedScene" uid="uid://b4lwlwvn3bfw3" path="res://scenes/enemies/worm_yellow.tscn" id="7_hodu8"]
+[ext_resource type="PackedScene" uid="uid://c1k3qxu5powwu" path="res://scenes/enemies/mouse.tscn" id="8_0cqmy"]
 [ext_resource type="Resource" uid="uid://cnsudgfi7boal" path="res://resources/inventory/key_blue.tres" id="8_bjle8"]
 [ext_resource type="Resource" uid="uid://bxgaxa5rrjio4" path="res://resources/inventory/key_green.tres" id="9_wls5t"]
 [ext_resource type="PackedScene" uid="uid://c3jhm7sck1126" path="res://scenes/item/animated_item.tscn" id="10_wls5t"]
@@ -46,6 +47,9 @@ position = Vector2(1990, 108)
 
 [node name="WormYellow" parent="Entities" instance=ExtResource("7_hodu8")]
 position = Vector2(899, 307)
+
+[node name="Mouse" parent="Entities" instance=ExtResource("8_0cqmy")]
+position = Vector2(1344, 128)
 
 [node name="Items" type="Node2D" parent="."]
 

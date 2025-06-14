@@ -1,7 +1,10 @@
 extends Node
 class_name StateMachine
 
+## Starting state for this [param StateMachine]
 @export var initial_state: State
+## Allow gravity to affect this entity
+@export var gravity: bool = true
 
 var current_state: State
 var states: Dictionary = {}
@@ -20,6 +23,8 @@ func init(parent: CharacterBody2D, animation_node: Node = null) -> void:
 			child.parent = parent
 			if animations:
 				child.animations = animations
+			if !gravity:
+				child.gravity = 0
 	
 	if initial_state:
 		initial_state.enter()
