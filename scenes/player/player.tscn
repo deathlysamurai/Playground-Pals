@@ -102,7 +102,7 @@ script = ExtResource("1_gmlin")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_5gtgg")]
 _max_health = 6
-_invulnerable_time = 0.15
+_invulnerable_time = 0.2
 
 [node name="PlayerAnimation" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -64)
