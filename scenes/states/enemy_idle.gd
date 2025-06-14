@@ -1,7 +1,7 @@
 extends State
 class_name EnemyIdle
 
-## Connects the state to use after waking from idle.
+## State to transition to after waking from idle.
 @export var wander_state: State
 @export var minimum_idle: float = 1
 @export var maximum_idle: float = 8
@@ -9,11 +9,13 @@ class_name EnemyIdle
 
 var idle_time: float
 
+
 func randomize_idle_time():
 	idle_time = randf_range(minimum_idle, maximum_idle)
 
 
 func enter():
+	super()
 	randomize_idle_time()
 
 
@@ -21,10 +23,8 @@ func update(delta: float):
 	if idle_time > 0:
 		idle_time -= delta
 	elif wander_state:
-		print("%s on %s is changing to wander state." % [self.name, parent.name])
 		transition.emit(self, wander_state.name)
 	else:
-		print("%s on %s is missing a wander state." % [self.name, parent.name])
 		randomize_idle_time()
 
 

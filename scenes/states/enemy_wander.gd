@@ -1,14 +1,14 @@
 extends State
 class_name EnemyWander
 
-## State to use after wandering.
+## State to use after wandering time ends.
 @export var idle_state: State
-## State to use when player is close
+## State to use when player is closer that [param chase_start_distance].
 @export var chase_state: State
 @export var minimum_wander: float = 4
 @export var maximum_wander: float = 8
-@export var move_speed: float = 10.0
-@export var chase_distance: float = 64 * 4 # 64px per tile, 4 tiles away
+@export var move_speed: float = 15.0
+@export var chase_start_distance: float = 64 * 4 # 64px per tile, 4 tiles away
 
 var move_direction: Vector2
 var wander_time: float
@@ -20,19 +20,18 @@ func randomize_wander():
 
 
 func enter():
+	super()
 	player = get_tree().get_first_node_in_group("player")
 	randomize_wander()
 
 
 func update(delta: float):
-	if player.global_position.distance_squared_to(parent.global_position) < (chase_distance * chase_distance):
-		print("%s on %s is changing to chase state." % [self.name, parent.name])
+	if player.global_position.distance_squared_to(parent.global_position) < pow(chase_start_distance, 2):
 		transition.emit(self, chase_state.name)
 		return
 	if wander_time > 0:
 		wander_time -= delta
 	else:
-		print("%s on %s is changing to idle state." % [self.name, parent.name])
 		transition.emit(self, idle_state.name)
 
 

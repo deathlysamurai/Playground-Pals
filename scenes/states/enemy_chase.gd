@@ -1,7 +1,7 @@
 extends State
 class_name EnemyChase
 
-## Connects the state to use when player is too far away.
+## State to use when player is too far away.
 @export var wander_state: State
 ## How fast the enemy should move when chasing the player.
 @export var move_speed: float = 50.0
@@ -12,6 +12,7 @@ var player: CharacterBody2D
 
 
 func enter():
+	super()
 	player = get_tree().get_first_node_in_group("player")
 
 
@@ -22,7 +23,6 @@ func physics_update(delta: float):
 	
 	var direction = player.global_position - parent.global_position
 	if direction.length_squared() > max_distance * max_distance:
-		print("%s on %s is changing to wander state." % [self.name, parent.name])
 		transition.emit(self, wander_state.name)
 		return
 	parent.velocity = direction.normalized() * move_speed
