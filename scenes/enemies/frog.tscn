@@ -39,7 +39,7 @@ animations = [{
 size = Vector2(60, 10)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5c1ia"]
-radius = 24.0
+radius = 22.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jksd0"]
 radius = 24.0
@@ -51,14 +51,14 @@ script = ExtResource("1_kosjv")
 jump_delay_variation = 0.4
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_jksd0")]
-_max_health = 1
+_max_health = 2
 
 [node name="JumpTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="Visuals" type="Node2D" parent="."]
 
-[node name="FrogAnimation" type="AnimatedSprite2D" parent="Visuals"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
 position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_5p7qk")
 animation = &"idle"
@@ -80,7 +80,7 @@ collision_mask = 18
 health_component = NodePath("../../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Visuals/HurtboxComponent"]
-position = Vector2(4, -30)
+position = Vector2(2, -32)
 shape = SubResource("CircleShape2D_5c1ia")
 debug_color = Color(0.405333, 0.990367, 0.502858, 0.419608)
 
