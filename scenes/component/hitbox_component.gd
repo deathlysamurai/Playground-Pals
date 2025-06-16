@@ -2,6 +2,9 @@ extends Area2D
 class_name HitboxComponent
 ## Provides a damage integer and an [Area2D] for collision checks
 
+## [param direction] is from hurtbox to hitbox
+signal successful_hit(direction: Vector2)
+
 @export var damage: int = 0
 @export var _collision_shape: CollisionShape2D
 
@@ -25,3 +28,7 @@ func enable():
 ## Disables this component's [param CollisionShape2D] at the end of the frame.
 func disable():
 	_disabled.call_deferred(true)
+
+
+func hit(direction: Vector2):
+	successful_hit.emit(direction)
