@@ -47,9 +47,8 @@ func on_menu_button_pressed():
 
 
 func on_options_button_pressed():
-	get_tree().paused = false
 	if options_scene == null: queue_free()
-	get_tree().change_scene_to_packed(options_scene)
+	add_child(options_scene.instantiate())
 
 
 func on_quit_button_pressed():

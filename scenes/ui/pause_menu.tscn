@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://copkir107fge"]
+[gd_scene load_steps=5 format=3 uid="uid://copkir107fge"]
 
 [ext_resource type="Script" uid="uid://7kxdjxwiyapx" path="res://scenes/ui/pause_menu.gd" id="1_6tw0m"]
 [ext_resource type="PackedScene" uid="uid://qx3mjuixtfuj" path="res://scenes/screen/level select/level_select.tscn" id="2_0lmf7"]
+[ext_resource type="PackedScene" uid="uid://c3ox0rmhuc664" path="res://scenes/ui/options_menu.tscn" id="3_8uki6"]
 [ext_resource type="Texture2D" uid="uid://bmp52mdks5hp1" path="res://assets/ui/icon_repeat_outline.png" id="3_f6eus"]
 
 [node name="PauseMenu" type="CanvasLayer"]
-process_mode = 2
+process_mode = 3
 script = ExtResource("1_6tw0m")
 menu_scene = ExtResource("2_0lmf7")
+options_scene = ExtResource("3_8uki6")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 process_mode = 2

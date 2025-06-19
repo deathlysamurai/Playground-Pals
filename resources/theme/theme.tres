@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=10 format=3 uid="uid://ddbwlyuipiewv"]
+[gd_resource type="Theme" load_steps=16 format=3 uid="uid://ddbwlyuipiewv"]
 
 [ext_resource type="Texture2D" uid="uid://bbk4c0aljl82j" path="res://assets/ui/button_square_depth_gloss.png" id="1_orw62"]
 [ext_resource type="Texture2D" uid="uid://mlphcs4i8d42" path="res://assets/ui/button_square_depth_gradient.png" id="3_56c54"]
@@ -34,6 +34,38 @@ texture_margin_top = 4.0
 texture_margin_right = 4.0
 texture_margin_bottom = 8.0
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_56c54"]
+size = Vector2(0, 0)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_65ii4"]
+size = Vector2(0, 0)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_j4h2o"]
+size = Vector2(0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56c54"]
+bg_color = Color(0.109804, 0.623529, 0.843137, 1)
+border_width_left = 2
+border_width_top = 4
+border_width_right = 2
+border_width_bottom = 4
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_65ii4"]
+bg_color = Color(0.211765, 0.741176, 0.968627, 1)
+border_width_left = 2
+border_width_top = 3
+border_width_right = 2
+border_width_bottom = 3
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j4h2o"]
+content_margin_left = 2.0
+content_margin_top = 8.0
+content_margin_right = 2.0
+content_margin_bottom = 8.0
+bg_color = Color(0.0862745, 0.490196, 0.658824, 1)
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cv7e8"]
 texture = ExtResource("5_65ii4")
 texture_margin_left = 8.0
@@ -51,6 +83,14 @@ Button/styles/disabled = SubResource("StyleBoxTexture_56c54")
 Button/styles/hover = SubResource("StyleBoxTexture_tu17m")
 Button/styles/normal = SubResource("StyleBoxTexture_iwyt8")
 Button/styles/pressed = SubResource("StyleBoxTexture_f2l62")
+GreyText/base_type = &"Label"
+GreyText/colors/font_color = Color(0.596078, 0.603922, 0.686275, 1)
+HSlider/icons/grabber = SubResource("PlaceholderTexture2D_56c54")
+HSlider/icons/grabber_disabled = SubResource("PlaceholderTexture2D_65ii4")
+HSlider/icons/grabber_highlight = SubResource("PlaceholderTexture2D_j4h2o")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_56c54")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_65ii4")
+HSlider/styles/slider = SubResource("StyleBoxFlat_j4h2o")
 HeaderLarge/colors/font_outline_color = Color(0.596078, 0.603922, 0.686275, 1)
 HeaderLarge/constants/outline_size = 4
 HeaderLarge/font_sizes/font_size = 32
