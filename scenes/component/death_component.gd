@@ -23,4 +23,5 @@ func on_died():
 	entities.add_child(self)
 	
 	global_position = spawn_position
+	$AudioStreamPlayer2D.play()
 	$AnimationPlayer.play("default")

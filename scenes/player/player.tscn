@@ -130,18 +130,26 @@ autoplay = "idle"
 [node name="HurtAudio" type="AudioStreamPlayer2D" parent="AudioPlayers"]
 unique_name_in_owner = true
 stream = ExtResource("12_ugbui")
+bus = &"SFX"
 
 [node name="HitAudio" type="AudioStreamPlayer2D" parent="AudioPlayers"]
 unique_name_in_owner = true
 stream = ExtResource("13_fcs02")
+bus = &"SFX"
 
 [node name="JumpAudio" type="AudioStreamPlayer2D" parent="AudioPlayers"]
 unique_name_in_owner = true
 stream = ExtResource("14_myrg7")
+bus = &"SFX"
 
 [node name="PowerJumpAudio" type="AudioStreamPlayer2D" parent="AudioPlayers"]
 unique_name_in_owner = true
 stream = ExtResource("14_myrg7")
+bus = &"SFX"
+
+[node name="AudioListener2D" type="AudioListener2D" parent="AudioPlayers"]
+position = Vector2(0, -47)
+current = true
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_collision_shape") instance=ExtResource("10_h17s1")]
 collision_layer = 2

@@ -78,6 +78,7 @@ hit_flash_material = SubResource("ShaderMaterial_hekhp")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("15_374yj")
+bus = &"SFX"
 
 [node name="Visuals" type="Node2D" parent="."]
 

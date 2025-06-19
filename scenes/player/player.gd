@@ -61,6 +61,7 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_just_pressed("jump") and cur_jump_count < JUMP_COUNT:
 		velocity.y = JUMP_VELOCITY
 		cur_jump_count += 1
+		%JumpAudio.play()
 
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("move_left", "move_right")
