@@ -53,6 +53,9 @@ func _physics_process(delta: float) -> void:
 		var cur_jump_velocity = JUMP_VELOCITY
 		if is_crouching:
 			cur_jump_velocity *= POWER_JUMP_FACTOR
+			%PowerJumpAudio.play()
+		else:
+			%JumpAudio.play()
 		velocity.y = cur_jump_velocity
 		cur_jump_count += 1
 	elif Input.is_action_just_pressed("jump") and cur_jump_count < JUMP_COUNT:
@@ -120,7 +123,9 @@ func on_vulnerable():
 
 func on_hurtbox_triggered(direction: Vector2):
 	bounce_from_hit(direction, false)
+	%HurtAudio.play()
 
 
 func on_successful_hit(direction: Vector2):
 	bounce_from_hit(direction, true)
+	%HitAudio.play()

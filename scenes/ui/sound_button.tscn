@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cef2m0tiar5pm"]
+
+[ext_resource type="Script" uid="uid://rpdrk2p1wbpt" path="res://scenes/ui/sound_button.gd" id="1_6ipwo"]
+[ext_resource type="PackedScene" uid="uid://fpvxvbq2547n" path="res://scenes/component/audio_component.tscn" id="2_h3nyd"]
+
+[node name="SoundButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Button with Sound"
+script = ExtResource("1_6ipwo")
+
+[node name="AudioComponent" parent="." instance=ExtResource("2_h3nyd")]

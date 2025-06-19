@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c5ectkst4kcax"]
+[gd_scene load_steps=25 format=3 uid="uid://c5ectkst4kcax"]
 
 [ext_resource type="Texture2D" uid="uid://clpe2e68ulmhh" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_front.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://qsvitwyovxj5" path="res://scenes/player/player.gd" id="1_gmlin"]
@@ -13,6 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://cusu2d4na3q6p" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_walk_b.png" id="5_75vfm"]
 [ext_resource type="PackedScene" uid="uid://5wi3kpcmihsi" path="res://scenes/component/hurtbox_component.tscn" id="9_h17s1"]
 [ext_resource type="PackedScene" uid="uid://c5dc185nhjm7e" path="res://scenes/component/hitbox_component.tscn" id="10_h17s1"]
+[ext_resource type="AudioStream" uid="uid://di7jxcya7yyxh" path="res://assets/kenney_new-platformer-pack-1.0/Sounds/sfx_hurt.ogg" id="12_ugbui"]
+[ext_resource type="AudioStream" uid="uid://vfgeq3670aio" path="res://assets/kenney_new-platformer-pack-1.0/Sounds/sfx_bump.ogg" id="13_fcs02"]
+[ext_resource type="AudioStream" uid="uid://drp16bxotf67x" path="res://assets/kenney_new-platformer-pack-1.0/Sounds/sfx_jump.ogg" id="14_myrg7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fcs02"]
 resource_local_to_scene = true
@@ -121,6 +124,24 @@ position = Vector2(0, -64)
 sprite_frames = SubResource("SpriteFrames_tyixm")
 animation = &"idle"
 autoplay = "idle"
+
+[node name="AudioPlayers" type="Node" parent="."]
+
+[node name="HurtAudio" type="AudioStreamPlayer2D" parent="AudioPlayers"]
+unique_name_in_owner = true
+stream = ExtResource("12_ugbui")
+
+[node name="HitAudio" type="AudioStreamPlayer2D" parent="AudioPlayers"]
+unique_name_in_owner = true
+stream = ExtResource("13_fcs02")
+
+[node name="JumpAudio" type="AudioStreamPlayer2D" parent="AudioPlayers"]
+unique_name_in_owner = true
+stream = ExtResource("14_myrg7")
+
+[node name="PowerJumpAudio" type="AudioStreamPlayer2D" parent="AudioPlayers"]
+unique_name_in_owner = true
+stream = ExtResource("14_myrg7")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_collision_shape") instance=ExtResource("10_h17s1")]
 collision_layer = 2
