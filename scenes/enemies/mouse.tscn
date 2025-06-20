@@ -1,0 +1,142 @@
+[gd_scene load_steps=21 format=3 uid="uid://c1k3qxu5powwu"]
+
+[ext_resource type="PackedScene" uid="uid://bmo6ltw2pfkb0" path="res://scenes/component/health_component.tscn" id="1_k47sx"]
+[ext_resource type="Script" uid="uid://cbug5dckd7p7h" path="res://scenes/enemies/mouse.gd" id="1_of327"]
+[ext_resource type="PackedScene" uid="uid://s8bt3htks3k6" path="res://scenes/component/hit_flash_component.tscn" id="3_ayis6"]
+[ext_resource type="Texture2D" uid="uid://cjlqwx6mpnah" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/mouse_rest.png" id="3_c6iqt"]
+[ext_resource type="PackedScene" uid="uid://bi2swldpe8y1" path="res://scenes/component/death_component.tscn" id="3_hekhp"]
+[ext_resource type="Shader" uid="uid://ckn7s0xc8bos3" path="res://scenes/component/hit_flash_component.gdshader" id="4_ayis6"]
+[ext_resource type="Texture2D" uid="uid://ds6befviwpkw5" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/mouse_walk_a.png" id="4_k47sx"]
+[ext_resource type="Texture2D" uid="uid://cq2j5l14cije8" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/mouse_walk_b.png" id="5_of327"]
+[ext_resource type="PackedScene" uid="uid://5wi3kpcmihsi" path="res://scenes/component/hurtbox_component.tscn" id="6_374yj"]
+[ext_resource type="PackedScene" uid="uid://c5dc185nhjm7e" path="res://scenes/component/hitbox_component.tscn" id="6_of327"]
+[ext_resource type="Script" uid="uid://c6fh6y170p638" path="res://scenes/states/state_machine.gd" id="7_nnocs"]
+[ext_resource type="Script" uid="uid://cgm4awknovy8v" path="res://scenes/states/enemy_idle.gd" id="8_fi75b"]
+[ext_resource type="Script" uid="uid://butttlkrq10lv" path="res://scenes/states/enemy_chase.gd" id="9_e2yb0"]
+[ext_resource type="Script" uid="uid://de02rfx00xllq" path="res://scenes/states/enemy_wander.gd" id="10_p215p"]
+[ext_resource type="AudioStream" uid="uid://di7jxcya7yyxh" path="res://assets/kenney_new-platformer-pack-1.0/Sounds/sfx_hurt.ogg" id="15_374yj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hekhp"]
+resource_local_to_scene = true
+shader = ExtResource("4_ayis6")
+shader_parameter/lerp_percent = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s64ei"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_c6iqt")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": ExtResource("4_k47sx")
+}, {
+"duration": 0.6,
+"texture": ExtResource("5_of327")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_of327")
+}],
+"loop": true,
+"name": &"ready",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k47sx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lcuwq"]
+radius = 13.0
+height = 40.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dnmlk"]
+radius = 14.0
+height = 39.0
+
+[node name="Mouse" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_of327")
+
+[node name="HealthComponent" parent="." instance=ExtResource("1_k47sx")]
+_max_health = 2
+
+[node name="DeathComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("3_hekhp")]
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../Visuals/AnimatedSprite2D")
+
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("3_ayis6")]
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../Visuals/AnimatedSprite2D")
+hit_flash_material = SubResource("ShaderMaterial_hekhp")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_374yj")
+bus = &"SFX"
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
+sprite_frames = SubResource("SpriteFrames_s64ei")
+animation = &"idle"
+autoplay = "idle"
+offset = Vector2(0, -31)
+
+[node name="HitboxComponent" parent="Visuals" node_paths=PackedStringArray("_collision_shape") instance=ExtResource("6_of327")]
+damage = 1
+_collision_shape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Visuals/HitboxComponent"]
+position = Vector2(-22, -11)
+shape = SubResource("CircleShape2D_k47sx")
+debug_color = Color(0.857215, 0.347025, 0.309155, 0.42)
+
+[node name="HurtboxComponent" parent="Visuals" node_paths=PackedStringArray("health_component") instance=ExtResource("6_374yj")]
+collision_mask = 2
+health_component = NodePath("../../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Visuals/HurtboxComponent"]
+position = Vector2(7, -13)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_lcuwq")
+debug_color = Color(0, 0.6, 0.219608, 0.419608)
+
+[node name="EntityCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -13)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_dnmlk")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("7_nnocs")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_wake_state")]
+script = ExtResource("8_fi75b")
+on_wake_state = NodePath("../Ready")
+maximum_idle = 5.0
+animation_name = "idle"
+metadata/_custom_type_script = "uid://cgm4awknovy8v"
+
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("stop_chase_state")]
+script = ExtResource("9_e2yb0")
+stop_chase_state = NodePath("../Ready")
+move_speed = 450.0
+jump_strength = 300.0
+animation_name = "move"
+metadata/_custom_type_script = "uid://butttlkrq10lv"
+
+[node name="Ready" type="Node" parent="StateMachine" node_paths=PackedStringArray("stop_wander_state", "alerted_state")]
+script = ExtResource("10_p215p")
+stop_wander_state = NodePath("../Idle")
+alerted_state = NodePath("../Chase")
+minimum_wander = 2.0
+maximum_wander = 5.0
+move_speed = 0.0
+animation_name = "ready"
+metadata/_custom_type_script = "uid://de02rfx00xllq"

@@ -6,6 +6,7 @@ class_name ItemBlock
 @export var spawned_item: PackedScene
 
 @onready var bounce_timer: Timer = $BounceTimer
+@onready var preview_sprite: Sprite2D = $PreviewSprite
 
 var y_speed: float = 0.0
 var orig_y_position: float
@@ -16,7 +17,7 @@ var block_hit: bool = false
 func _ready() -> void:
 	orig_y_position = sprite_2d.position.y
 	hit_block_sprite = load("res://assets/kenney_new-platformer-pack-1.0/Sprites/Tiles/Default/block_yellow.png")
-
+	preview_sprite.queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -40,6 +41,6 @@ func _spawn_item() -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if not block_hit:
 		_bounce()
-		_spawn_item()
+		Callable(_spawn_item).call_deferred()
 		sprite_2d.texture = hit_block_sprite
 		block_hit = true

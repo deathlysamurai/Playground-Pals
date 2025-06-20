@@ -1,12 +1,21 @@
-[gd_scene load_steps=12 format=3 uid="uid://h06dc54ft1qa"]
+[gd_scene load_steps=17 format=3 uid="uid://h06dc54ft1qa"]
 
 [ext_resource type="Script" uid="uid://bnt58h4lvq5g0" path="res://scenes/enemies/frog.gd" id="1_kosjv"]
 [ext_resource type="Texture2D" uid="uid://cl61q7xx4kg64" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/frog_idle.png" id="2_5p7qk"]
 [ext_resource type="PackedScene" uid="uid://bmo6ltw2pfkb0" path="res://scenes/component/health_component.tscn" id="2_jksd0"]
+[ext_resource type="PackedScene" uid="uid://s8bt3htks3k6" path="res://scenes/component/hit_flash_component.tscn" id="3_07b2c"]
+[ext_resource type="PackedScene" uid="uid://bi2swldpe8y1" path="res://scenes/component/death_component.tscn" id="3_cs1ye"]
 [ext_resource type="Texture2D" uid="uid://bmmrm625ehntj" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/frog_rest.png" id="3_jksd0"]
 [ext_resource type="PackedScene" uid="uid://c5dc185nhjm7e" path="res://scenes/component/hitbox_component.tscn" id="3_noff5"]
 [ext_resource type="PackedScene" uid="uid://5wi3kpcmihsi" path="res://scenes/component/hurtbox_component.tscn" id="4_5c1ia"]
 [ext_resource type="Texture2D" uid="uid://b1esovwac0bat" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/frog_jump.png" id="4_noff5"]
+[ext_resource type="Shader" uid="uid://ckn7s0xc8bos3" path="res://scenes/component/hit_flash_component.gdshader" id="5_72bdi"]
+[ext_resource type="AudioStream" uid="uid://di7jxcya7yyxh" path="res://assets/kenney_new-platformer-pack-1.0/Sounds/sfx_hurt.ogg" id="7_1snb5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1snb5"]
+resource_local_to_scene = true
+shader = ExtResource("5_72bdi")
+shader_parameter/lerp_percent = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5p7qk"]
 animations = [{
@@ -39,7 +48,7 @@ animations = [{
 size = Vector2(60, 10)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5c1ia"]
-radius = 24.0
+radius = 22.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jksd0"]
 radius = 24.0
@@ -51,14 +60,27 @@ script = ExtResource("1_kosjv")
 jump_delay_variation = 0.4
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_jksd0")]
-_max_health = 1
+_max_health = 2
+
+[node name="DeathComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("3_cs1ye")]
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../Visuals/AnimatedSprite2D")
+
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("3_07b2c")]
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../Visuals/AnimatedSprite2D")
+hit_flash_material = SubResource("ShaderMaterial_1snb5")
 
 [node name="JumpTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_1snb5")
+bus = &"SFX"
+
 [node name="Visuals" type="Node2D" parent="."]
 
-[node name="FrogAnimation" type="AnimatedSprite2D" parent="Visuals"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
 position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_5p7qk")
 animation = &"idle"
@@ -80,7 +102,7 @@ collision_mask = 18
 health_component = NodePath("../../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Visuals/HurtboxComponent"]
-position = Vector2(4, -30)
+position = Vector2(2, -32)
 shape = SubResource("CircleShape2D_5c1ia")
 debug_color = Color(0.405333, 0.990367, 0.502858, 0.419608)
 

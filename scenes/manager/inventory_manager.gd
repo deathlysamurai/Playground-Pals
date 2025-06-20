@@ -20,6 +20,7 @@ func add_to_inventory(item: InventoryObject, count: int):
 			}
 	else:
 		current_inventory[item.id]["quantity"] += count
+	$AudioStreamPlayer.play()
 	inventory_change()
 
 

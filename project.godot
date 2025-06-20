@@ -27,6 +27,7 @@ gdscript/warnings/unused_parameter=0
 
 enemy=""
 player=""
+entities_layer=""
 
 [gui]
 

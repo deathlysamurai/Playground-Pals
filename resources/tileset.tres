@@ -1,7 +1,9 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://cw3lyx0oi4ur"]
+[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://cw3lyx0oi4ur"]
 
 [ext_resource type="Texture2D" uid="uid://c7x7slgruoek1" path="res://assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png" id="1_qp2yk"]
 [ext_resource type="PackedScene" uid="uid://cpxx6rjlrahat" path="res://scenes/item/blocks/coin_block.tscn" id="2_81yw3"]
+[ext_resource type="PackedScene" uid="uid://c1t1xay2g23n3" path="res://scenes/item/blocks/key_block.tscn" id="3_e5o2m"]
+[ext_resource type="PackedScene" uid="uid://c6dk7euvracxv" path="res://scenes/item/blocks/lock_block.tscn" id="4_luhvj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e1eqq"]
 resource_name = "kenny_terrain"
@@ -172,7 +174,9 @@ texture_region_size = Vector2i(64, 64)
 4:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, 3.95131, 32, -19.1921, 21.45, -32, 3.95132)
 4:3/0/terrains_peering_bit/right_side = 3
 5:3/0 = 0
+5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 6:3/0 = 0
+6:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 7:3/0 = 0
 7:3/0/terrain_set = 0
 7:3/0/terrain = 0
@@ -210,7 +214,9 @@ texture_region_size = Vector2i(64, 64)
 4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 4:4/0/terrains_peering_bit/right_side = 3
 5:4/0 = 0
+5:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 6:4/0 = 0
+6:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 7:4/0 = 0
 7:4/0/terrain_set = 0
 7:4/0/terrain = 0
@@ -246,7 +252,9 @@ texture_region_size = Vector2i(64, 64)
 4:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-27.7591, -28.1447, 32, -27.7591, 32, 27.7591, -27.7591, 27.3736)
 4:5/0/terrains_peering_bit/right_side = 3
 5:5/0 = 0
+5:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 6:5/0 = 0
+6:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 7:5/0 = 0
 7:5/0/terrain_set = 0
 7:5/0/terrain = 0
@@ -278,6 +286,7 @@ texture_region_size = Vector2i(64, 64)
 4:6/0/terrain_set = 0
 5:6/0 = 0
 6:6/0 = 0
+6:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 7:6/0 = 0
 7:6/0/terrain_set = 0
 7:6/0/terrain = 0
@@ -467,6 +476,7 @@ texture_region_size = Vector2i(64, 64)
 4:11/0/terrains_peering_bit/bottom_side = 3
 4:11/0/terrains_peering_bit/left_side = 3
 5:11/0 = 0
+5:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 6:11/0 = 0
 6:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 7:11/0 = 0
@@ -509,6 +519,7 @@ texture_region_size = Vector2i(64, 64)
 5:12/0 = 0
 5:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 27.0947, 10.725, 15.2408, 25.9658, -6.77369, 32, -32, 32)
 6:12/0 = 0
+6:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 7:12/0 = 0
 7:12/0/terrain_set = 0
 7:12/0/terrain = 1
@@ -589,6 +600,7 @@ texture_region_size = Vector2i(64, 64)
 4:14/0/terrains_peering_bit/left_side = 3
 4:14/0/terrains_peering_bit/top_side = 3
 5:14/0 = 0
+5:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 6:14/0 = 0
 6:14/0/terrain_set = 0
 6:14/0/terrain = 0
@@ -731,6 +743,8 @@ texture_region_size = Vector2i(64, 64)
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_vgpmu"]
 resource_name = "Item Blocks"
 scenes/1/scene = ExtResource("2_81yw3")
+scenes/2/scene = ExtResource("3_e5o2m")
+scenes/3/scene = ExtResource("4_luhvj")
 
 [resource]
 tile_size = Vector2i(64, 64)

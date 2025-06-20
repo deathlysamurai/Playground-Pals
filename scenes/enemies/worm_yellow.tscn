@@ -1,0 +1,108 @@
+[gd_scene load_steps=15 format=3 uid="uid://b4lwlwvn3bfw3"]
+
+[ext_resource type="Texture2D" uid="uid://x7vwu3n6v0d3" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/worm_ring_rest.png" id="1_2vvgf"]
+[ext_resource type="Script" uid="uid://cxvsfewnf7wpd" path="res://scenes/enemies/worm_yellow.gd" id="1_8og8s"]
+[ext_resource type="Script" uid="uid://c6fh6y170p638" path="res://scenes/states/state_machine.gd" id="1_olkfn"]
+[ext_resource type="Script" uid="uid://cgm4awknovy8v" path="res://scenes/states/enemy_idle.gd" id="2_2vvgf"]
+[ext_resource type="Texture2D" uid="uid://bmmsv7lwaks1f" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/worm_ring_move_a.png" id="2_anxwk"]
+[ext_resource type="PackedScene" uid="uid://bmo6ltw2pfkb0" path="res://scenes/component/health_component.tscn" id="2_ejy0m"]
+[ext_resource type="PackedScene" uid="uid://bi2swldpe8y1" path="res://scenes/component/death_component.tscn" id="3_8vrb6"]
+[ext_resource type="Texture2D" uid="uid://dfkf1kwrvael6" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/worm_ring_move_b.png" id="3_ejy0m"]
+[ext_resource type="Script" uid="uid://butttlkrq10lv" path="res://scenes/states/enemy_chase.gd" id="5_7tqgh"]
+[ext_resource type="Script" uid="uid://de02rfx00xllq" path="res://scenes/states/enemy_wander.gd" id="6_ib4x3"]
+[ext_resource type="PackedScene" uid="uid://5wi3kpcmihsi" path="res://scenes/component/hurtbox_component.tscn" id="9_8vrb6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8og8s"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("2_anxwk")
+}, {
+"duration": 2.0,
+"texture": ExtResource("3_ejy0m")
+}],
+"loop": true,
+"name": &"crawl",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_2vvgf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_2vvgf")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ejy0m"]
+radius = 13.0
+height = 54.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_43p0i"]
+radius = 8.0
+height = 58.0
+
+[node name="WormYellow" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 16
+script = ExtResource("1_8og8s")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_ejy0m")]
+_max_health = 1
+
+[node name="DeathComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("3_8vrb6")]
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../Visuals/AnimatedSprite2D")
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
+sprite_frames = SubResource("SpriteFrames_8og8s")
+animation = &"idle"
+autoplay = "idle"
+offset = Vector2(0, -31)
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("9_8vrb6")]
+collision_mask = 2
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, -13)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ejy0m")
+
+[node name="EntityCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_43p0i")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_olkfn")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_wake_state")]
+script = ExtResource("2_2vvgf")
+on_wake_state = NodePath("../Wander")
+animation_name = "idle"
+metadata/_custom_type_script = "uid://cgm4awknovy8v"
+
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("stop_chase_state")]
+script = ExtResource("5_7tqgh")
+stop_chase_state = NodePath("../Wander")
+toward_player = false
+animation_name = "crawl"
+metadata/_custom_type_script = "uid://butttlkrq10lv"
+
+[node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("stop_wander_state", "alerted_state")]
+script = ExtResource("6_ib4x3")
+stop_wander_state = NodePath("../Idle")
+alerted_state = NodePath("../Chase")
+animation_name = "crawl"
+metadata/_custom_type_script = "uid://de02rfx00xllq"

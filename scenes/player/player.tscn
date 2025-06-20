@@ -1,16 +1,26 @@
-[gd_scene load_steps=18 format=3 uid="uid://c5ectkst4kcax"]
+[gd_scene load_steps=25 format=3 uid="uid://c5ectkst4kcax"]
 
 [ext_resource type="Texture2D" uid="uid://clpe2e68ulmhh" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_front.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://qsvitwyovxj5" path="res://scenes/player/player.gd" id="1_gmlin"]
 [ext_resource type="Texture2D" uid="uid://d22shi53r60pl" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_duck.png" id="2_0owmy"]
 [ext_resource type="PackedScene" uid="uid://bmo6ltw2pfkb0" path="res://scenes/component/health_component.tscn" id="2_5gtgg"]
 [ext_resource type="Texture2D" uid="uid://qqm0vuou4250" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_idle.png" id="2_gmlin"]
+[ext_resource type="PackedScene" uid="uid://s8bt3htks3k6" path="res://scenes/component/hit_flash_component.tscn" id="3_gx1jg"]
 [ext_resource type="Texture2D" uid="uid://c3exuiy727e2t" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_jump.png" id="4_75vfm"]
 [ext_resource type="Texture2D" uid="uid://dr1cf0suwtfow" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_hit.png" id="4_je7p5"]
 [ext_resource type="Texture2D" uid="uid://dv87c5h45dd62" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_walk_a.png" id="4_p47bc"]
+[ext_resource type="Shader" uid="uid://ckn7s0xc8bos3" path="res://scenes/component/hit_flash_component.gdshader" id="4_ugbui"]
 [ext_resource type="Texture2D" uid="uid://cusu2d4na3q6p" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_walk_b.png" id="5_75vfm"]
 [ext_resource type="PackedScene" uid="uid://5wi3kpcmihsi" path="res://scenes/component/hurtbox_component.tscn" id="9_h17s1"]
 [ext_resource type="PackedScene" uid="uid://c5dc185nhjm7e" path="res://scenes/component/hitbox_component.tscn" id="10_h17s1"]
+[ext_resource type="AudioStream" uid="uid://di7jxcya7yyxh" path="res://assets/kenney_new-platformer-pack-1.0/Sounds/sfx_hurt.ogg" id="12_ugbui"]
+[ext_resource type="AudioStream" uid="uid://vfgeq3670aio" path="res://assets/kenney_new-platformer-pack-1.0/Sounds/sfx_bump.ogg" id="13_fcs02"]
+[ext_resource type="AudioStream" uid="uid://drp16bxotf67x" path="res://assets/kenney_new-platformer-pack-1.0/Sounds/sfx_jump.ogg" id="14_myrg7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fcs02"]
+resource_local_to_scene = true
+shader = ExtResource("4_ugbui")
+shader_parameter/lerp_percent = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tyixm"]
 animations = [{
@@ -76,12 +86,12 @@ animations = [{
 size = Vector2(40, 10)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_je7p5"]
-radius = 40.0
-height = 100.0
+radius = 34.0
+height = 94.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
-radius = 35.0
-height = 90.0
+radius = 28.0
+height = 85.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h17s1"]
 radius = 40.0
@@ -91,6 +101,10 @@ height = 100.0
 radius = 27.0
 height = 94.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gx1jg"]
+radius = 41.0
+height = 102.0
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 0
 collision_mask = 17
@@ -98,13 +112,44 @@ script = ExtResource("1_gmlin")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_5gtgg")]
 _max_health = 6
-_invulnerable_time = 0.15
+_invulnerable_time = 0.2
+
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("3_gx1jg")]
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../PlayerAnimation")
+hit_flash_material = SubResource("ShaderMaterial_fcs02")
 
 [node name="PlayerAnimation" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -64)
 sprite_frames = SubResource("SpriteFrames_tyixm")
-animation = &"hurt"
+animation = &"idle"
 autoplay = "idle"
+
+[node name="AudioPlayers" type="Node" parent="."]
+
+[node name="HurtAudio" type="AudioStreamPlayer2D" parent="AudioPlayers"]
+unique_name_in_owner = true
+stream = ExtResource("12_ugbui")
+bus = &"SFX"
+
+[node name="HitAudio" type="AudioStreamPlayer2D" parent="AudioPlayers"]
+unique_name_in_owner = true
+stream = ExtResource("13_fcs02")
+bus = &"SFX"
+
+[node name="JumpAudio" type="AudioStreamPlayer2D" parent="AudioPlayers"]
+unique_name_in_owner = true
+stream = ExtResource("14_myrg7")
+bus = &"SFX"
+
+[node name="PowerJumpAudio" type="AudioStreamPlayer2D" parent="AudioPlayers"]
+unique_name_in_owner = true
+stream = ExtResource("14_myrg7")
+bus = &"SFX"
+
+[node name="AudioListener2D" type="AudioListener2D" parent="AudioPlayers"]
+position = Vector2(0, -47)
+current = true
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_collision_shape") instance=ExtResource("10_h17s1")]
 collision_layer = 2
@@ -120,13 +165,12 @@ collision_mask = 40
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
-position = Vector2(0, -49)
+position = Vector2(0, -47)
 shape = SubResource("CapsuleShape2D_je7p5")
 debug_color = Color(0.811765, 0.6, 0.701961, 0.419608)
 
 [node name="CollisionArea2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, -48)
+position = Vector2(0, -43)
 shape = SubResource("CapsuleShape2D_dovo2")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -146,9 +190,19 @@ shape = SubResource("CapsuleShape2D_h17s1")
 debug_color = Color(0.798646, 0.775008, 0.340864, 0.42)
 
 [node name="ItemBoxArea2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 64
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemBoxArea2D"]
 position = Vector2(0, -54)
 shape = SubResource("CapsuleShape2D_fm80t")
+
+[node name="InteractBlockArea2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractBlockArea2D"]
+position = Vector2(0, -49)
+shape = SubResource("CapsuleShape2D_gx1jg")
