@@ -29,6 +29,10 @@ enemy=""
 player=""
 entities_layer=""
 
+[gui]
+
+theme/custom="uid://ddbwlyuipiewv"
+
 [input]
 
 reset={

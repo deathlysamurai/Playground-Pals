@@ -20,6 +20,7 @@ func update_count(count: int):
 	count = min(count, 99)
 	if count > 9:
 		toggle_counter(true)
+		@warning_ignore("integer_division")
 		tens_count_texture.texture = number_texture.numbers[count / 10]
 		ones_count_texture.texture = number_texture.numbers[count % 10]
 		tens_count_texture.visible = true
