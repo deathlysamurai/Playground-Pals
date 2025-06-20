@@ -18,8 +18,10 @@ const ACCELERATION_SMOOTHING = 10
 
 
 func _ready() -> void:
+	hurtbox_component.hurtbox_triggered.connect(on_hurtbox_triggered)
 	jump_timer.wait_time = jump_delay
 	jump_timer.start()
+
 
 func _physics_process(delta: float) -> void:
 	# Checks if the entity has fallen too far and removes from game
@@ -53,3 +55,7 @@ func get_direction_to_player():
 	if player_node == null:
 		return Vector2.ZERO
 	return (player_node.global_position - global_position).normalized()
+
+
+func on_hurtbox_triggered(direction) -> void:
+	$AudioStreamPlayer2D.play()

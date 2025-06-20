@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://h06dc54ft1qa"]
+[gd_scene load_steps=17 format=3 uid="uid://h06dc54ft1qa"]
 
 [ext_resource type="Script" uid="uid://bnt58h4lvq5g0" path="res://scenes/enemies/frog.gd" id="1_kosjv"]
 [ext_resource type="Texture2D" uid="uid://cl61q7xx4kg64" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/frog_idle.png" id="2_5p7qk"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://5wi3kpcmihsi" path="res://scenes/component/hurtbox_component.tscn" id="4_5c1ia"]
 [ext_resource type="Texture2D" uid="uid://b1esovwac0bat" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/frog_jump.png" id="4_noff5"]
 [ext_resource type="Shader" uid="uid://ckn7s0xc8bos3" path="res://scenes/component/hit_flash_component.gdshader" id="5_72bdi"]
+[ext_resource type="AudioStream" uid="uid://di7jxcya7yyxh" path="res://assets/kenney_new-platformer-pack-1.0/Sounds/sfx_hurt.ogg" id="7_1snb5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1snb5"]
 resource_local_to_scene = true
@@ -72,6 +73,10 @@ hit_flash_material = SubResource("ShaderMaterial_1snb5")
 
 [node name="JumpTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_1snb5")
+bus = &"SFX"
 
 [node name="Visuals" type="Node2D" parent="."]
 

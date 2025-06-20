@@ -9,6 +9,9 @@ var hit_flash_tween: Tween
 
 
 func _ready() -> void:
+	if health_component == null:
+		print("HitFlashComponent on %s is missing a HealthComponent reference" % owner.name)
+		return
 	health_component.health_changed.connect(on_health_changed)
 	sprite.material = hit_flash_material
 

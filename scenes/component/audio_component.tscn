@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://fpvxvbq2547n"]
+
+[ext_resource type="AudioStream" uid="uid://tx06jarf27nf" path="res://assets/kenney_new-platformer-pack-1.0/Sounds/sfx_select.ogg" id="1_fpeyr"]
+
+[node name="AudioComponent" type="AudioStreamPlayer"]
+stream = ExtResource("1_fpeyr")

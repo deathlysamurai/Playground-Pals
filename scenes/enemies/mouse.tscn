@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c1k3qxu5powwu"]
+[gd_scene load_steps=21 format=3 uid="uid://c1k3qxu5powwu"]
 
 [ext_resource type="PackedScene" uid="uid://bmo6ltw2pfkb0" path="res://scenes/component/health_component.tscn" id="1_k47sx"]
 [ext_resource type="Script" uid="uid://cbug5dckd7p7h" path="res://scenes/enemies/mouse.gd" id="1_of327"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://cgm4awknovy8v" path="res://scenes/states/enemy_idle.gd" id="8_fi75b"]
 [ext_resource type="Script" uid="uid://butttlkrq10lv" path="res://scenes/states/enemy_chase.gd" id="9_e2yb0"]
 [ext_resource type="Script" uid="uid://de02rfx00xllq" path="res://scenes/states/enemy_wander.gd" id="10_p215p"]
+[ext_resource type="AudioStream" uid="uid://di7jxcya7yyxh" path="res://assets/kenney_new-platformer-pack-1.0/Sounds/sfx_hurt.ogg" id="15_374yj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hekhp"]
 resource_local_to_scene = true
@@ -74,6 +75,10 @@ sprite = NodePath("../Visuals/AnimatedSprite2D")
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Visuals/AnimatedSprite2D")
 hit_flash_material = SubResource("ShaderMaterial_hekhp")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_374yj")
+bus = &"SFX"
 
 [node name="Visuals" type="Node2D" parent="."]
 
