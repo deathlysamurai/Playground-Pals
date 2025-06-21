@@ -3,10 +3,11 @@ extends PlayerState
 
 func enter() -> void:
 	super()
+	player.hitbox_component.enable()
 
 
 func exit() -> void:
-	pass
+	player.hitbox_component.disable()
 
 
 func update(_delta: float) -> void:

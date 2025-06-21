@@ -16,7 +16,7 @@ const POWER_JUMP_FACTOR := 1.25
 var default_gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var current_jump_count := 0
 var max_jump_count := 2
-var power_jump := false
+var power_jump_ready := false
 var move_direction_x := 0.0
 var is_crouching := false #TODO: Check if needed as states are implemented.
 var is_stunned := false
@@ -40,6 +40,8 @@ func _ready() -> void:
 	GameEvents.emit_player_health_setup(health_component)
 	
 	state_machine.init(self, player_animation)
+	
+	hitbox_component.disable()
 
 
 func _physics_process(delta: float) -> void:
@@ -140,11 +142,12 @@ func handle_horizontal_movement(delta: float) -> void:
 		velocity.x = lerpf(velocity.x, 0.0, (1 - exp(-10 * delta)))
 
 
-func handle_jump() -> void:
+func handle_jump(high_jump: bool = false) -> void:
 	if input_jump_just_pressed and current_jump_count < max_jump_count:
+		power_jump_ready = high_jump
 		state_machine.change_state("jump")
 		current_jump_count += 1
-		#velocity.y = (JUMP_VELOCITY * POWER_JUMP_FACTOR) if power_jump else JUMP_VELOCITY
+		#velocity.y = (JUMP_VELOCITY * POWER_JUMP_FACTOR) if power_jump_ready else JUMP_VELOCITY
 
 
 func flip_direction() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c5ectkst4kcax"]
+[gd_scene load_steps=36 format=3 uid="uid://c5ectkst4kcax"]
 
 [ext_resource type="Texture2D" uid="uid://clpe2e68ulmhh" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_front.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://qsvitwyovxj5" path="res://scenes/player/player.gd" id="1_gmlin"]
@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://vfgeq3670aio" path="res://assets/kenney_new-platformer-pack-1.0/Sounds/sfx_bump.ogg" id="13_fcs02"]
 [ext_resource type="AudioStream" uid="uid://drp16bxotf67x" path="res://assets/kenney_new-platformer-pack-1.0/Sounds/sfx_jump.ogg" id="14_myrg7"]
 [ext_resource type="AudioStream" uid="uid://b7eep300528il" path="res://assets/kenney_new-platformer-pack-1.0/Sounds/sfx_jump-high.ogg" id="15_007i1"]
+[ext_resource type="AudioStream" uid="uid://cxdp5umoukb0l" path="res://assets/kenney_new-platformer-pack-1.0/Sounds/phaserUp5.ogg" id="16_j4nxn"]
 [ext_resource type="Script" uid="uid://c6fh6y170p638" path="res://scenes/states/state_machine.gd" id="17_ioxgp"]
 [ext_resource type="Script" uid="uid://b8i12xryhfonj" path="res://scenes/states/player_states/player_locked.gd" id="17_kvlxm"]
 [ext_resource type="Script" uid="uid://c7obpt5orw7rn" path="res://scenes/states/player_states/player_idle.gd" id="18_yj68g"]
@@ -138,7 +139,7 @@ drag_vertical_enabled = true
 unique_name_in_owner = true
 position = Vector2(0, -64)
 sprite_frames = SubResource("SpriteFrames_tyixm")
-animation = &"idle"
+animation = &"crouch"
 autoplay = "idle"
 
 [node name="AudioPlayers" type="Node2D" parent="."]
@@ -165,6 +166,12 @@ bus = &"SFX"
 [node name="PowerJumpAudio" type="AudioStreamPlayer2D" parent="AudioPlayers"]
 unique_name_in_owner = true
 stream = ExtResource("15_007i1")
+bus = &"SFX"
+
+[node name="PowerJumpChargeAudio" type="AudioStreamPlayer2D" parent="AudioPlayers"]
+unique_name_in_owner = true
+stream = ExtResource("16_j4nxn")
+volume_db = 8.0
 bus = &"SFX"
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_collision_shape") instance=ExtResource("10_h17s1")]
@@ -242,14 +249,16 @@ jump_sound = NodePath("../../AudioPlayers/JumpAudio")
 high_jump_sound = NodePath("../../AudioPlayers/PowerJumpAudio")
 animation_name = "jump"
 
-[node name="Crouch" type="Node" parent="StateMachine"]
+[node name="Crouch" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump_charged_sound")]
 script = ExtResource("24_6cv16")
+jump_charged_sound = NodePath("../../AudioPlayers/PowerJumpChargeAudio")
 animation_name = "crouch"
 
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource("22_6cv16")
 animation_name = "fall"
 
-[node name="Stun" type="Node" parent="StateMachine"]
+[node name="Stun" type="Node" parent="StateMachine" node_paths=PackedStringArray("audio_player")]
 script = ExtResource("24_cnsyf")
+audio_player = NodePath("../../AudioPlayers/HurtAudio")
 animation_name = "hurt"

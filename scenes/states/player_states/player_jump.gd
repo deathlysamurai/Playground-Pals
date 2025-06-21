@@ -6,13 +6,13 @@ extends PlayerState
 
 func enter() -> void:
 	super()
-	var jump_speed = (player.JUMP_VELOCITY * player.POWER_JUMP_FACTOR) if player.power_jump else player.JUMP_VELOCITY
+	var jump_speed = (player.JUMP_VELOCITY * player.POWER_JUMP_FACTOR) if player.power_jump_ready else player.JUMP_VELOCITY
 	player.velocity.y = jump_speed
-	if player.power_jump:
+	if player.power_jump_ready:
 		high_jump_sound.play()
 	else:
 		jump_sound.play()
-	player.power_jump = false
+	player.power_jump_ready = false
 
 
 func exit() -> void:
