@@ -19,7 +19,7 @@ func init(parent: CharacterBody2D, animation_node: Node = null) -> void:
 	for child in get_children():
 		if child is State:
 			states[child.name.to_lower()] = child
-			child.transition.connect(on_child_transition)
+			child.transition.connect(_on_child_transition)
 			child.parent = parent
 			if animations:
 				child.animations = animations
@@ -43,8 +43,22 @@ func _physics_process(delta: float) -> void:
 		current_state.physics_update(delta)
 
 
-# Handle exiting previous state and entering next state
-func on_child_transition(state: State, new_state_name: String):
+# Handle exiting previous state and entering next state based on owner node's calls.
+func change_state(new_state_name: String):
+	var new_state = states.get(new_state_name.to_lower())
+	if !new_state: return
+	
+	if current_state:
+		current_state.exit()
+	
+	print("%s's state is changing to %s by function call." % [owner.name, new_state_name])
+	
+	new_state.enter()
+	current_state = new_state
+
+
+# Handle exiting previous state and entering next state based on child node's logic.
+func _on_child_transition(state: State, new_state_name: String):
 	# Safety check: Only continue if the signal came from current scene
 	if state != current_state:
 		return
@@ -55,7 +69,7 @@ func on_child_transition(state: State, new_state_name: String):
 	if current_state:
 		current_state.exit()
 	
-	print("%s is changing from %s to %s" % [owner.name, current_state.name, new_state_name])
+	print("%s's state is changing to %s from %s." % [owner.name, new_state_name, current_state.name])
 	
 	new_state.enter()
 	current_state = new_state

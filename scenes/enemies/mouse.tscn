@@ -11,9 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://5wi3kpcmihsi" path="res://scenes/component/hurtbox_component.tscn" id="6_374yj"]
 [ext_resource type="PackedScene" uid="uid://c5dc185nhjm7e" path="res://scenes/component/hitbox_component.tscn" id="6_of327"]
 [ext_resource type="Script" uid="uid://c6fh6y170p638" path="res://scenes/states/state_machine.gd" id="7_nnocs"]
-[ext_resource type="Script" uid="uid://cgm4awknovy8v" path="res://scenes/states/enemy_idle.gd" id="8_fi75b"]
-[ext_resource type="Script" uid="uid://butttlkrq10lv" path="res://scenes/states/enemy_chase.gd" id="9_e2yb0"]
-[ext_resource type="Script" uid="uid://de02rfx00xllq" path="res://scenes/states/enemy_wander.gd" id="10_p215p"]
+[ext_resource type="Script" uid="uid://cgm4awknovy8v" path="res://scenes/states/enemy_states/enemy_idle.gd" id="8_fi75b"]
+[ext_resource type="Script" uid="uid://butttlkrq10lv" path="res://scenes/states/enemy_states/enemy_chase.gd" id="9_e2yb0"]
+[ext_resource type="Script" uid="uid://de02rfx00xllq" path="res://scenes/states/enemy_states/enemy_wander.gd" id="10_p215p"]
 [ext_resource type="AudioStream" uid="uid://di7jxcya7yyxh" path="res://assets/kenney_new-platformer-pack-1.0/Sounds/sfx_hurt.ogg" id="15_374yj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hekhp"]

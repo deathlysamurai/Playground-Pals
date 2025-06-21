@@ -33,4 +33,4 @@ func physics_update(delta: float):
 	if not parent.is_on_floor():
 		parent.velocity += gravity * Vector2.DOWN * delta
 		return
-	parent.velocity.x = 0 # Stop the horizontal movement when resting.
+	parent.velocity.x = 0 # Stop the horizontal movement when idle.
