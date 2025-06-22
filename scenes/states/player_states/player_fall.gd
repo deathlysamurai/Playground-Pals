@@ -15,7 +15,7 @@ func update(_delta: float) -> void:
 
 
 func physics_update(_delta: float) -> void:
-	player.apply_gravity(_delta)
+	player.apply_gravity(_delta, player.falling_gravity)
 	player.handle_jump()
 	player.handle_horizontal_movement(_delta)
 	player.handle_landing()

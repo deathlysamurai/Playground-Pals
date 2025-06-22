@@ -4,16 +4,19 @@ class_name Player
 #region Variables
 const SPEED := 300.0
 const SPRINT_FACTOR := 1.5
-const JUMP_VELOCITY := -500.0
+const JUMP_VELOCITY := -620.0
 const POWER_JUMP_FACTOR := 1.25
+const JUMP_CANCEL_FACTOR := .75
 
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
 @onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
 @onready var state_machine: StateMachine = $StateMachine
 @onready var player_animation: AnimatedSprite2D = %PlayerAnimation
+@onready var item_box_collision: CollisionShape2D = $ItemBoxArea2D/CollisionShape2D
 
 var default_gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+var falling_gravity: float = 1800.0
 var current_jump_count := 0
 var max_jump_count := 2
 var power_jump_ready := false
@@ -37,7 +40,6 @@ func _ready() -> void:
 	GameEvents.emit_player_health_setup(health_component)
 	
 	state_machine.init(self, player_animation)
-	
 	hitbox_component.disable()
 
 

@@ -105,9 +105,8 @@ height = 85.0
 radius = 40.0
 height = 100.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fm80t"]
-radius = 27.0
-height = 94.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_j4nxn"]
+radius = 28.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gx1jg"]
 radius = 41.0
@@ -139,7 +138,7 @@ drag_vertical_enabled = true
 unique_name_in_owner = true
 position = Vector2(0, -64)
 sprite_frames = SubResource("SpriteFrames_tyixm")
-animation = &"crouch"
+animation = &"jump"
 autoplay = "idle"
 
 [node name="AudioPlayers" type="Node2D" parent="."]
@@ -212,8 +211,9 @@ collision_layer = 64
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemBoxArea2D"]
-position = Vector2(0, -54)
-shape = SubResource("CapsuleShape2D_fm80t")
+position = Vector2(0, -65)
+shape = SubResource("CircleShape2D_j4nxn")
+debug_color = Color(0.952941, 0.886275, 0.164706, 0.419608)
 
 [node name="InteractBlockArea2D" type="Area2D" parent="."]
 visible = false
