@@ -3,6 +3,7 @@ extends PlayerState
 @export var jump_sound: AudioStreamPlayer2D
 @export var high_jump_sound: AudioStreamPlayer2D
 
+var item_box_disable = Callable(self, "item_box_collision_disable")
 
 func enter() -> void:
 	super()
@@ -13,11 +14,11 @@ func enter() -> void:
 	else:
 		jump_sound.play()
 	player.power_jump_ready = false
-	player.item_box_collision.disabled = false
+	item_box_disable.call_deferred(false)
 
 
 func exit() -> void:
-	player.item_box_collision.disabled = true
+	item_box_disable.call_deferred(true)
 
 
 func update(_delta: float) -> void:
@@ -37,3 +38,7 @@ func falling_transition() -> void:
 	if not player.input_jump:
 		player.velocity.y *= player.JUMP_CANCEL_FACTOR
 		transition.emit(self, "fall")
+
+
+func item_box_collision_disable(disabled: bool) -> void:
+	player.item_box_collision.disabled = disabled
