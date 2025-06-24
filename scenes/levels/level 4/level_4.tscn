@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=4 uid="uid://b4i2t7wx6eoaq"]
+[gd_scene load_steps=13 format=4 uid="uid://b4i2t7wx6eoaq"]
 
 [ext_resource type="PackedScene" uid="uid://d1dyky7fq2mu8" path="res://scenes/ui/hud.tscn" id="1_r1moi"]
 [ext_resource type="PackedScene" uid="uid://6hs8h7kjruje" path="res://scenes/manager/level_manager.tscn" id="2_s5l8l"]
 [ext_resource type="PackedScene" uid="uid://bmg2xrmwbsban" path="res://scenes/manager/inventory_manager.tscn" id="3_10atq"]
 [ext_resource type="TileSet" uid="uid://cw3lyx0oi4ur" path="res://resources/tileset.tres" id="4_xht7s"]
 [ext_resource type="PackedScene" uid="uid://c5ectkst4kcax" path="res://scenes/player/player.tscn" id="5_88mns"]
+[ext_resource type="PackedScene" uid="uid://h06dc54ft1qa" path="res://scenes/enemies/frog.tscn" id="6_wpswk"]
 [ext_resource type="PackedScene" uid="uid://c3jhm7sck1126" path="res://scenes/item/animated_item.tscn" id="9_gs8ju"]
 [ext_resource type="PackedScene" uid="uid://d2laumtt8clbt" path="res://scenes/item/static_item.tscn" id="10_diu6x"]
 [ext_resource type="Resource" uid="uid://bgog7npsw6rln" path="res://resources/inventory/key_red.tres" id="11_0vwed"]
@@ -29,6 +30,9 @@ tile_set = ExtResource("4_xht7s")
 position = Vector2(121, 433)
 
 [node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
+
+[node name="Frog" parent="Entities" instance=ExtResource("6_wpswk")]
+position = Vector2(792, 640)
 
 [node name="Items" type="Node2D" parent="."]
 
