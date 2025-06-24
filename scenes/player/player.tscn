@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c5ectkst4kcax"]
+[gd_scene load_steps=36 format=3 uid="uid://c5ectkst4kcax"]
 
 [ext_resource type="Texture2D" uid="uid://clpe2e68ulmhh" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Characters/Default/character_pink_front.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://qsvitwyovxj5" path="res://scenes/player/player.gd" id="1_gmlin"]
@@ -16,6 +16,17 @@
 [ext_resource type="AudioStream" uid="uid://di7jxcya7yyxh" path="res://assets/kenney_new-platformer-pack-1.0/Sounds/sfx_hurt.ogg" id="12_ugbui"]
 [ext_resource type="AudioStream" uid="uid://vfgeq3670aio" path="res://assets/kenney_new-platformer-pack-1.0/Sounds/sfx_bump.ogg" id="13_fcs02"]
 [ext_resource type="AudioStream" uid="uid://drp16bxotf67x" path="res://assets/kenney_new-platformer-pack-1.0/Sounds/sfx_jump.ogg" id="14_myrg7"]
+[ext_resource type="AudioStream" uid="uid://b7eep300528il" path="res://assets/kenney_new-platformer-pack-1.0/Sounds/sfx_jump-high.ogg" id="15_007i1"]
+[ext_resource type="AudioStream" uid="uid://cxdp5umoukb0l" path="res://assets/kenney_new-platformer-pack-1.0/Sounds/phaserUp5.ogg" id="16_j4nxn"]
+[ext_resource type="Script" uid="uid://c6fh6y170p638" path="res://scenes/states/state_machine.gd" id="17_ioxgp"]
+[ext_resource type="Script" uid="uid://b8i12xryhfonj" path="res://scenes/states/player_states/player_locked.gd" id="17_kvlxm"]
+[ext_resource type="Script" uid="uid://c7obpt5orw7rn" path="res://scenes/states/player_states/player_idle.gd" id="18_yj68g"]
+[ext_resource type="Script" uid="uid://d0qet5w6hiovl" path="res://scenes/states/player_states/player_walk.gd" id="19_ioxgp"]
+[ext_resource type="Script" uid="uid://cxbhwwf2acb3g" path="res://scenes/states/player_states/player_sprint.gd" id="20_cnsyf"]
+[ext_resource type="Script" uid="uid://rqwdfrpuop1h" path="res://scenes/states/player_states/player_jump.gd" id="21_007i1"]
+[ext_resource type="Script" uid="uid://bjagjtaynt0c4" path="res://scenes/states/player_states/player_fall.gd" id="22_6cv16"]
+[ext_resource type="Script" uid="uid://bni3do83uohy1" path="res://scenes/states/player_states/player_crouch.gd" id="24_6cv16"]
+[ext_resource type="Script" uid="uid://cbe2a508cd4ug" path="res://scenes/states/player_states/player_stun.gd" id="24_cnsyf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fcs02"]
 resource_local_to_scene = true
@@ -30,6 +41,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"crouch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gmlin")
+}],
+"loop": true,
+"name": &"fall",
 "speed": 5.0
 }, {
 "frames": [{
@@ -49,17 +68,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 1.0
-}, {
-"frames": [{
-"duration": 1.5,
-"texture": ExtResource("1_dovo2")
-}, {
-"duration": 0.75,
-"texture": ExtResource("2_gmlin")
-}],
-"loop": true,
-"name": &"idle_flip",
 "speed": 1.0
 }, {
 "frames": [{
@@ -97,9 +105,8 @@ height = 85.0
 radius = 40.0
 height = 100.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fm80t"]
-radius = 27.0
-height = 94.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_j4nxn"]
+radius = 28.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gx1jg"]
 radius = 41.0
@@ -116,16 +123,29 @@ _invulnerable_time = 0.2
 
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("3_gx1jg")]
 health_component = NodePath("../HealthComponent")
-sprite = NodePath("../PlayerAnimation")
+sprite = NodePath("../Visuals/PlayerAnimation")
 hit_flash_material = SubResource("ShaderMaterial_fcs02")
 
-[node name="PlayerAnimation" type="AnimatedSprite2D" parent="."]
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="Visuals"]
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="PlayerAnimation" type="AnimatedSprite2D" parent="Visuals"]
+unique_name_in_owner = true
 position = Vector2(0, -64)
 sprite_frames = SubResource("SpriteFrames_tyixm")
-animation = &"idle"
+animation = &"jump"
 autoplay = "idle"
 
-[node name="AudioPlayers" type="Node" parent="."]
+[node name="AudioPlayers" type="Node2D" parent="."]
+
+[node name="AudioListener2D" type="AudioListener2D" parent="AudioPlayers"]
+position = Vector2(0, -47)
+current = true
 
 [node name="HurtAudio" type="AudioStreamPlayer2D" parent="AudioPlayers"]
 unique_name_in_owner = true
@@ -144,12 +164,14 @@ bus = &"SFX"
 
 [node name="PowerJumpAudio" type="AudioStreamPlayer2D" parent="AudioPlayers"]
 unique_name_in_owner = true
-stream = ExtResource("14_myrg7")
+stream = ExtResource("15_007i1")
 bus = &"SFX"
 
-[node name="AudioListener2D" type="AudioListener2D" parent="AudioPlayers"]
-position = Vector2(0, -47)
-current = true
+[node name="PowerJumpChargeAudio" type="AudioStreamPlayer2D" parent="AudioPlayers"]
+unique_name_in_owner = true
+stream = ExtResource("16_j4nxn")
+volume_db = 8.0
+bus = &"SFX"
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_collision_shape") instance=ExtResource("10_h17s1")]
 collision_layer = 2
@@ -173,12 +195,6 @@ debug_color = Color(0.811765, 0.6, 0.701961, 0.419608)
 position = Vector2(0, -43)
 shape = SubResource("CapsuleShape2D_dovo2")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position_smoothing_enabled = true
-position_smoothing_speed = 3.0
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-
 [node name="PickupArea2D" type="Area2D" parent="."]
 visible = false
 collision_layer = 4
@@ -195,8 +211,9 @@ collision_layer = 64
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemBoxArea2D"]
-position = Vector2(0, -54)
-shape = SubResource("CapsuleShape2D_fm80t")
+position = Vector2(0, -65)
+shape = SubResource("CircleShape2D_j4nxn")
+debug_color = Color(0.952941, 0.886275, 0.164706, 0.419608)
 
 [node name="InteractBlockArea2D" type="Area2D" parent="."]
 visible = false
@@ -206,3 +223,42 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractBlockArea2D"]
 position = Vector2(0, -49)
 shape = SubResource("CapsuleShape2D_gx1jg")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("17_ioxgp")
+initial_state = NodePath("Idle")
+
+[node name="Locked" type="Node" parent="StateMachine"]
+script = ExtResource("17_kvlxm")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("18_yj68g")
+animation_name = "idle"
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource("19_ioxgp")
+animation_name = "move"
+
+[node name="Sprint" type="Node" parent="StateMachine"]
+script = ExtResource("20_cnsyf")
+animation_name = "move"
+
+[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump_sound", "high_jump_sound")]
+script = ExtResource("21_007i1")
+jump_sound = NodePath("../../AudioPlayers/JumpAudio")
+high_jump_sound = NodePath("../../AudioPlayers/PowerJumpAudio")
+animation_name = "jump"
+
+[node name="Crouch" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump_charged_sound")]
+script = ExtResource("24_6cv16")
+jump_charged_sound = NodePath("../../AudioPlayers/PowerJumpChargeAudio")
+animation_name = "crouch"
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource("22_6cv16")
+animation_name = "fall"
+
+[node name="Stun" type="Node" parent="StateMachine" node_paths=PackedStringArray("audio_player")]
+script = ExtResource("24_cnsyf")
+audio_player = NodePath("../../AudioPlayers/HurtAudio")
+animation_name = "hurt"
