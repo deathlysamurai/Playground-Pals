@@ -55,7 +55,7 @@ func physics_update(delta: float):
 			return
 		time_remaining -= delta
 	
-	if not parent.is_on_floor():
+	if not parent.is_on_floor() && gravity != 0:
 		parent.velocity += gravity * Vector2.DOWN * delta
 		return
 	

@@ -16,10 +16,20 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 	
 	move_and_slide()
+	scale_animation_speed()
 	# Change visuals left/right orientation
 	var move_sign = sign(velocity.x)
 	if move_sign != 0:
-		$Visuals.scale = Vector2(-move_sign, 1)
+		$Visuals.scale = Vector2(move_sign, 1)
+
+
+func scale_animation_speed() -> void:
+	if state_machine.current_state.name == "Idle":
+		animated_sprite.speed_scale = 1.0
+	elif state_machine.current_state.name == "Chase":
+		animated_sprite.speed_scale = 1.0
+	elif state_machine.current_state.name == "Wander":
+		animated_sprite.speed_scale = .33
 
 
 func on_hurtbox_triggered(direction) -> void:

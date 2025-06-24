@@ -21,7 +21,10 @@ var player: CharacterBody2D
 func enter():
 	super()
 	player = get_tree().get_first_node_in_group("player")
-	randomize_wander()
+	if gravity != 0:
+		randomize_wander_grounded()
+	else:
+		randomize_wander_floating()
 	alert_time = alert_delay
 
 
@@ -36,7 +39,8 @@ func update(delta: float):
 
 
 func physics_update(delta: float):
-	if not parent.is_on_floor():
+	
+	if not parent.is_on_floor() && gravity != 0:
 		parent.velocity += gravity * Vector2.DOWN * delta
 		return
 	
@@ -44,8 +48,14 @@ func physics_update(delta: float):
 		parent.velocity = move_direction * move_speed
 
 
-func randomize_wander():
+func randomize_wander_grounded():
 	move_direction = Vector2(randf_range(-1, 1), 0).normalized()
+	wander_time = randf_range(minimum_wander, maximum_wander)
+
+
+func randomize_wander_floating():
+	move_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
+	print(move_direction)
 	wander_time = randf_range(minimum_wander, maximum_wander)
 
 

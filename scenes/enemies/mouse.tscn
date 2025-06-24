@@ -97,7 +97,7 @@ shape = SubResource("CircleShape2D_k47sx")
 debug_color = Color(0.857215, 0.347025, 0.309155, 0.42)
 
 [node name="HurtboxComponent" parent="Visuals" node_paths=PackedStringArray("health_component") instance=ExtResource("6_374yj")]
-collision_mask = 2
+collision_mask = 34
 health_component = NodePath("../../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Visuals/HurtboxComponent"]

@@ -30,7 +30,9 @@ func update(delta: float):
 
 func physics_update(delta: float):
 	# If falling, add gravity
-	if not parent.is_on_floor():
+	if not parent.is_on_floor() && gravity != 0:
 		parent.velocity += gravity * Vector2.DOWN * delta
 		return
 	parent.velocity.x = 0 # Stop the horizontal movement when idle.
+	if gravity == 0: # Stop vertical movement only when there's no gravity.
+		parent.velocity.y = 0

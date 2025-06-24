@@ -1,17 +1,16 @@
-[gd_scene load_steps=22 format=3 uid="uid://h06dc54ft1qa"]
+[gd_scene load_steps=21 format=3 uid="uid://0ctw7rc4cmgd"]
 
-[ext_resource type="Script" uid="uid://bnt58h4lvq5g0" path="res://scenes/enemies/frog.gd" id="1_kosjv"]
-[ext_resource type="Texture2D" uid="uid://cl61q7xx4kg64" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/frog_idle.png" id="2_5p7qk"]
+[ext_resource type="Script" uid="uid://crhepee3vvueg" path="res://scenes/enemies/saw.gd" id="1_57u6s"]
 [ext_resource type="PackedScene" uid="uid://bmo6ltw2pfkb0" path="res://scenes/component/health_component.tscn" id="2_jksd0"]
 [ext_resource type="PackedScene" uid="uid://s8bt3htks3k6" path="res://scenes/component/hit_flash_component.tscn" id="3_07b2c"]
 [ext_resource type="PackedScene" uid="uid://bi2swldpe8y1" path="res://scenes/component/death_component.tscn" id="3_cs1ye"]
-[ext_resource type="Texture2D" uid="uid://bmmrm625ehntj" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/frog_rest.png" id="3_jksd0"]
 [ext_resource type="PackedScene" uid="uid://c5dc185nhjm7e" path="res://scenes/component/hitbox_component.tscn" id="3_noff5"]
 [ext_resource type="PackedScene" uid="uid://5wi3kpcmihsi" path="res://scenes/component/hurtbox_component.tscn" id="4_5c1ia"]
-[ext_resource type="Texture2D" uid="uid://b1esovwac0bat" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/frog_jump.png" id="4_noff5"]
 [ext_resource type="Shader" uid="uid://ckn7s0xc8bos3" path="res://scenes/component/hit_flash_component.gdshader" id="5_72bdi"]
+[ext_resource type="Texture2D" uid="uid://balejjfmf53lv" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/saw_rest.png" id="6_ofv0u"]
 [ext_resource type="AudioStream" uid="uid://di7jxcya7yyxh" path="res://assets/kenney_new-platformer-pack-1.0/Sounds/sfx_hurt.ogg" id="7_1snb5"]
-[ext_resource type="Texture2D" uid="uid://mw8n25w26kfc" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/frog_idle_2.png" id="7_e1hvq"]
+[ext_resource type="Texture2D" uid="uid://cioailv0mnapk" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/saw_a.png" id="7_3ggdi"]
+[ext_resource type="Texture2D" uid="uid://b5d115xm7esl7" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/saw_b.png" id="8_e1hvq"]
 [ext_resource type="Script" uid="uid://c6fh6y170p638" path="res://scenes/states/state_machine.gd" id="12_3ggdi"]
 [ext_resource type="Script" uid="uid://cgm4awknovy8v" path="res://scenes/states/enemy_states/enemy_idle.gd" id="13_e1hvq"]
 [ext_resource type="Script" uid="uid://butttlkrq10lv" path="res://scenes/states/enemy_states/enemy_chase.gd" id="14_ttif0"]
@@ -26,39 +25,26 @@ shader_parameter/lerp_percent = 0.0
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("7_e1hvq")
+"texture": ExtResource("6_ofv0u")
 }],
 "loop": true,
 "name": &"idle",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_jksd0")
-}],
-"loop": true,
-"name": &"idle_swim",
-"speed": 5.0
+"duration": 0.5,
+"texture": ExtResource("7_3ggdi")
 }, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_noff5")
+"duration": 0.5,
+"texture": ExtResource("8_e1hvq")
 }],
 "loop": true,
-"name": &"jump",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_5p7qk")
-}],
-"loop": true,
-"name": &"ready",
+"name": &"spinning",
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5c1ia"]
-size = Vector2(60, 16)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ofv0u"]
+radius = 28.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5c1ia"]
 radius = 22.0
@@ -66,10 +52,10 @@ radius = 22.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_jksd0"]
 radius = 22.0
 
-[node name="Frog" type="CharacterBody2D" groups=["enemy"]]
+[node name="Saw" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 16
 collision_mask = 17
-script = ExtResource("1_kosjv")
+script = ExtResource("1_57u6s")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_jksd0")]
 _max_health = 2
@@ -90,65 +76,63 @@ bus = &"SFX"
 [node name="Visuals" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
-position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_5p7qk")
-animation = &"ready"
+animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.932149
 
 [node name="HitboxComponent" parent="Visuals" node_paths=PackedStringArray("_collision_shape") instance=ExtResource("3_noff5")]
 unique_name_in_owner = true
+collision_layer = 40
 damage = 1
 _collision_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Visuals/HitboxComponent"]
-position = Vector2(0, -9)
-shape = SubResource("RectangleShape2D_5c1ia")
+shape = SubResource("CircleShape2D_ofv0u")
 debug_color = Color(0.917647, 0.6, 0.701961, 0.419608)
 
 [node name="HurtboxComponent" parent="Visuals" node_paths=PackedStringArray("health_component") instance=ExtResource("4_5c1ia")]
 unique_name_in_owner = true
-collision_mask = 34
+collision_mask = 0
 health_component = NodePath("../../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Visuals/HurtboxComponent"]
-position = Vector2(2, -32)
 shape = SubResource("CircleShape2D_5c1ia")
 debug_color = Color(0.405333, 0.990367, 0.502858, 0.419608)
 
-[node name="FrogCollision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -24)
+[node name="EntityCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_jksd0")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("12_3ggdi")
 initial_state = NodePath("Idle")
+gravity = false
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_wake_state")]
 script = ExtResource("13_e1hvq")
-on_wake_state = NodePath("../Ready")
+on_wake_state = NodePath("../Wander")
 maximum_idle = 5.0
 animation_name = "idle"
 metadata/_custom_type_script = "uid://cgm4awknovy8v"
 
 [node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("stop_chase_state", "timeout_state")]
 script = ExtResource("14_ttif0")
-stop_chase_state = NodePath("../Ready")
-timeout_state = NodePath("../Ready")
+stop_chase_state = NodePath("../Wander")
+timeout_state = NodePath("../Wander")
 move_speed = 200.0
 jump_strength = 450.0
 max_distance = 384.0
 duration = 5.0
-movement_type = "Jump"
-jump_animation_name = "jump"
-animation_name = "ready"
+movement_type = "Float"
+animation_name = "spinning"
 metadata/_custom_type_script = "uid://butttlkrq10lv"
 
-[node name="Ready" type="Node" parent="StateMachine" node_paths=PackedStringArray("stop_wander_state", "alerted_state")]
+[node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("stop_wander_state", "alerted_state")]
 script = ExtResource("15_2sr4q")
 stop_wander_state = NodePath("../Idle")
 alerted_state = NodePath("../Chase")
 minimum_wander = 2.0
 maximum_wander = 5.0
-move_speed = 0.0
-animation_name = "ready"
+move_speed = 20.0
+animation_name = "spinning"
 metadata/_custom_type_script = "uid://de02rfx00xllq"
