@@ -1,0 +1,110 @@
+[gd_scene load_steps=15 format=3 uid="uid://c44q5uyokmes7"]
+
+[ext_resource type="PackedScene" uid="uid://bmo6ltw2pfkb0" path="res://scenes/component/health_component.tscn" id="1_odvwt"]
+[ext_resource type="Script" uid="uid://ra86kf7p7el2" path="res://scenes/enemies/drop_block.gd" id="1_uuh1j"]
+[ext_resource type="PackedScene" uid="uid://c5dc185nhjm7e" path="res://scenes/component/hitbox_component.tscn" id="2_uuh1j"]
+[ext_resource type="Texture2D" uid="uid://1g7n0hs4rn7h" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/block_idle.png" id="3_ngxrh"]
+[ext_resource type="Texture2D" uid="uid://cqdtkrespdd2c" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/block_fall.png" id="4_aa85j"]
+[ext_resource type="Texture2D" uid="uid://cqlavcywanva6" path="res://assets/kenney_new-platformer-pack-1.0/Sprites/Enemies/Default/block_rest.png" id="5_0xl2o"]
+[ext_resource type="Script" uid="uid://c6fh6y170p638" path="res://scenes/states/state_machine.gd" id="7_aa85j"]
+[ext_resource type="Script" uid="uid://1hus8p4w853v" path="res://scenes/states/enemy_states/enemy_patrol.gd" id="8_0xl2o"]
+[ext_resource type="Script" uid="uid://di3u1mp8ul065" path="res://scenes/states/enemy_states/enemy_dash.gd" id="9_0xl2o"]
+[ext_resource type="Script" uid="uid://cw3ui2fcf1uer" path="res://scenes/states/enemy_states/enemy_return.gd" id="10_kwpc5"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kwpc5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ngxrh")
+}],
+"loop": true,
+"name": &"alert",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_aa85j")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_0xl2o")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aa85j"]
+size = Vector2(56, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xl2o"]
+size = Vector2(55, 55)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kwpc5"]
+size = Vector2(80, 640)
+
+[node name="DropBlock" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 17
+script = ExtResource("1_uuh1j")
+
+[node name="HealthComponent" parent="." instance=ExtResource("1_odvwt")]
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
+sprite_frames = SubResource("SpriteFrames_kwpc5")
+animation = &"alert"
+offset = Vector2(0, -32)
+
+[node name="HitboxComponent" parent="Visuals" node_paths=PackedStringArray("_collision_shape") instance=ExtResource("2_uuh1j")]
+damage = 10
+_collision_shape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Visuals/HitboxComponent"]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_aa85j")
+debug_color = Color(0.939095, 0.220943, 0.291559, 0.42)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_0xl2o")
+
+[node name="PatrolAreaVision" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PatrolAreaVision"]
+position = Vector2(0, 320)
+shape = SubResource("RectangleShape2D_kwpc5")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("7_aa85j")
+initial_state = NodePath("Patrol")
+gravity = false
+
+[node name="Patrol" type="Node" parent="StateMachine" node_paths=PackedStringArray("alerted_state", "vision_area", "hitbox")]
+script = ExtResource("8_0xl2o")
+alerted_state = NodePath("../Dash")
+vision_area = NodePath("../../PatrolAreaVision")
+hitbox = NodePath("../../Visuals/HitboxComponent")
+animation_name = "idle"
+
+[node name="Dash" type="Node" parent="StateMachine" node_paths=PackedStringArray("stop_dash_state")]
+script = ExtResource("9_0xl2o")
+stop_dash_state = NodePath("../Return")
+move_speed = 600.0
+max_distance = 640.0
+direction_lock = "Vertical"
+move_delay = 0.1
+animation_name = "attack"
+
+[node name="Return" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_return_state")]
+script = ExtResource("10_kwpc5")
+on_return_state = NodePath("../Patrol")
+animation_name = "alert"

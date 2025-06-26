@@ -25,6 +25,7 @@ func init(parent: CharacterBody2D, animation_node: Node = null) -> void:
 				child.animations = animations
 			if !gravity:
 				child.gravity = 0
+			child.init()
 	
 	if initial_state:
 		initial_state.enter()

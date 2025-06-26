@@ -19,6 +19,10 @@ func _set_parent(node: CharacterBody2D) -> void:
 	return
 
 
+func init():
+	pass
+
+
 ## Called when entering this state, to set up before updates start. [br]
 ## Use [param super()] to use the base function (such as animations)
 ## in addition to extended class overrides.
