@@ -139,6 +139,7 @@ jump_strength = 450.0
 max_distance = 384.0
 duration = 5.0
 movement_type = "Jump"
+move_delay = 0.4
 jump_animation_name = "jump"
 animation_name = "ready"
 metadata/_custom_type_script = "uid://butttlkrq10lv"

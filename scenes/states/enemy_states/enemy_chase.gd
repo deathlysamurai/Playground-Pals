@@ -24,6 +24,8 @@ const JUMP_MINIMUM_Y_VECTOR := -0.25
 @export var toward_player: bool = true
 ## Determines how jump strength is applied to the movement direction.
 @export_enum("Walk", "Jump", "Float") var movement_type: String = "Walk"
+## Time in between jumps. The time is between jumping actions, not landing.
+@export_range(0, 3, .1) var move_delay: float = 0
 ## The [param String] name of the animation to play when jumping.
 @export var jump_animation_name: String
 
@@ -34,11 +36,13 @@ var direction: Vector2
 var move_sign: float = 1.0
 var use_timer: bool = false
 var time_remaining: float
+var move_delay_remaining: float = 0
 
 
 func enter():
 	super()
 	player = get_tree().get_first_node_in_group("player")
+	move_delay_remaining = move_delay
 	if duration > 0:
 		time_remaining = duration
 		use_timer = true
@@ -47,22 +51,17 @@ func enter():
 
 
 func physics_update(delta: float):
+	direction = player.global_position - parent.global_position
 	animate_movement()
 	# Exit state checks. Timer, falling, and distance from player.
-	if use_timer:
-		if time_remaining < 0:
-			transition.emit(self, timeout_state.name)
-			return
-		time_remaining -= delta
-	
-	if not parent.is_on_floor() && gravity != 0:
-		parent.velocity += gravity * Vector2.DOWN * delta
+	if end_chase(delta):
 		return
 	
-	direction = player.global_position - parent.global_position
-	if direction.length_squared() > max_distance * max_distance:
-		transition.emit(self, stop_chase_state.name)
+	if move_delay_remaining > 0:
+		move_delay_remaining -= delta
+		decelerate(delta)
 		return
+	move_delay_remaining = move_delay
 	
 	velocity = parent.velocity
 	direction = direction.normalized()
@@ -74,11 +73,49 @@ func physics_update(delta: float):
 	parent.velocity = velocity
 
 
+func end_chase(delta: float) -> bool:
+	if timer_countdown(delta):
+		return true
+	if check_distance():
+		return true
+	if is_airborne(delta):
+		return true	
+	return false
+
+
+func timer_countdown(delta: float) -> bool:
+	if use_timer:
+		if time_remaining < 0:
+			transition.emit(self, timeout_state.name)
+			return true
+		time_remaining -= delta
+	return false
+
+
+func check_distance() -> bool:
+	if direction.length_squared() > max_distance * max_distance:
+		transition.emit(self, stop_chase_state.name)
+		return true
+	return false
+
+
+# Leaving gravity as part of this check unless there's a need to decouple
+func is_airborne(delta: float) -> bool:
+	if not parent.is_on_floor() && gravity != 0:
+		parent.velocity += gravity * Vector2.DOWN * delta
+		return true
+	return false
+
+
 func animate_movement() -> void:
 	if parent.is_on_floor():
 		animations.play(animation_name)
 	else:
 		animations.play(jump_animation_name)
+
+
+func decelerate(delta: float):
+	parent.velocity.x = lerpf(parent.velocity.x, 0.0, (1 - exp(-7 * delta)))
 
 
 func move_horizontal():
@@ -95,7 +132,7 @@ func move_vertical():
 		velocity.y = move_sign * direction.y * jump
 	# Jump gives a full jump_strength 
 	elif movement_type == "Jump":
-		velocity.y = -1 * jump_strength
+		velocity.y = (direction.y / 4 - 1) * jump_strength
 	# Float uses move_speed instead of jump_strength, meant to use with gravity disabled on state_machine
 	elif movement_type == "Float":
 		velocity.y = move_sign * direction.y * move_speed

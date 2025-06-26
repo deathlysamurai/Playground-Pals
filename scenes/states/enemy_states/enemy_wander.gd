@@ -55,7 +55,6 @@ func randomize_wander_grounded():
 
 func randomize_wander_floating():
 	move_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
-	print(move_direction)
 	wander_time = randf_range(minimum_wander, maximum_wander)
 
 

@@ -93,9 +93,11 @@ on_wake_state = NodePath("../Wander")
 animation_name = "idle"
 metadata/_custom_type_script = "uid://cgm4awknovy8v"
 
-[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("stop_chase_state")]
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("stop_chase_state", "timeout_state")]
 script = ExtResource("5_7tqgh")
 stop_chase_state = NodePath("../Wander")
+timeout_state = NodePath("../Wander")
+move_speed = 75.0
 toward_player = false
 animation_name = "crawl"
 metadata/_custom_type_script = "uid://butttlkrq10lv"
@@ -104,5 +106,6 @@ metadata/_custom_type_script = "uid://butttlkrq10lv"
 script = ExtResource("6_ib4x3")
 stop_wander_state = NodePath("../Idle")
 alerted_state = NodePath("../Chase")
+move_speed = 25.0
 animation_name = "crawl"
 metadata/_custom_type_script = "uid://de02rfx00xllq"
